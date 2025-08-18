@@ -1,5 +1,6 @@
 # User Story Template
 
+## Admin User Stories
 **Title:**
 As an admin, I want to log into the portal with my username and password, so that I can manage the platform securely.
 
@@ -68,7 +69,7 @@ As an admin, I want to run a stored procedure in MySQL CLI to get the number of 
 
 
 
-
+## Patient User Stories
 **Title:**
 As a patient, I want to view a list of doctors without logging in, so that I can explore options before registering.
 
@@ -138,7 +139,7 @@ As a patient, I want to log in and book an hour-long appointment, so that I can 
 
 
 
-
+## Doctor User Stories
 **Title:**
 As a doctor, I want to log into the portal, so that I can manage my appointments.
 
