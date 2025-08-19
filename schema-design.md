@@ -1,4 +1,9 @@
 ## MySQL Database Design
+### Table: Admins
+  - id: INT, Primary Key, Auto Increment
+  - name: STRING, Not Null
+  - last_name: STRING, Not Null
+  - role: STRING, Not NUll
 ### Table: patients
   - id: INT, Primary Key, Auto Increment
   - name: STRING, Not Null
