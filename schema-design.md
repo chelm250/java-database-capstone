@@ -1,10 +1,11 @@
 ## MySQL Database Design
-### Table: Admins
+### Table: admins
   - id: INT, Primary Key, Auto Increment
   - name: STRING, Not Null
   - last_name: STRING, Not Null
   - email: STRING, Not Null
-  - role: STRING, Not NUll
+  - address: INT, Foreign Key -> addresses(id)
+  - role: STRING, Not Null
 ### Table: patients
   - id: INT, Primary Key, Auto Increment
   - name: STRING, Not Null
@@ -12,6 +13,7 @@
   - email: STRING, Not Null
   - date_of_birth: DATE, Not Null
   - gender: STRING, Not Null
+  - address: INT, Foreign Key -> addresses(id)
 ### Table: doctors
   - id: INT, Primary Key, Auto Increment
   - name: STRING, Not Null
@@ -19,16 +21,21 @@
   - email: STRING, Not Null
   - date_of_birth: DATE, Not Null
   - gender: STRING, Not Null
+  - address: INT, Foreign Key -> addresses(id)
+  - clinic_location: INT, Foreign Key -> clinic_ocations(id)
 ### Table: appointments
   - id: INT, Primary Key, Auto Increment
   - patient_id: INT, Foreign Key -> patients(id)
   - doctor_id: INT, Foreign Key -> doctors(id)
   - appointment_time: DATETIME, Not Null
-  - location: STRING, Not Null
+  - clinic_location: INT, Foreign Key -> clinic_ocations(id)
   - status: INT (0 = Scheduled, 1 = Completed, 2 = Cancelled)
 ### Table: clinic_locations
   - id: INT, Primary Key, Auto Increment
   - location_name: STRING, Not Null, Unique
+  - address: INT, Foreign Key -> addresses(id)
+### Table: addresses
+  - id: INT, Primary Key, Auto Increment
   - street: STRING, Not Null
   - number: STRING, Not Null
   - interior_number: STRING, Not Null
