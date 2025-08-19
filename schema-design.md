@@ -3,17 +3,20 @@
   - id: INT, Primary Key, Auto Increment
   - name: STRING, Not Null
   - last_name: STRING, Not Null
+  - email: STRING, Not Null
   - role: STRING, Not NUll
 ### Table: patients
   - id: INT, Primary Key, Auto Increment
   - name: STRING, Not Null
   - last_name: STRING, Not Null
+  - email: STRING, Not Null
   - date_of_birth: DATE, Not Null
   - gender: STRING, Not Null
 ### Table: doctors
   - id: INT, Primary Key, Auto Increment
   - name: STRING, Not Null
   - last_name: STRING, Not Null
+  - email: STRING, Not Null
   - date_of_birth: DATE, Not Null
   - gender: STRING, Not Null
 ### Table: appointments
