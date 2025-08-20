@@ -3,7 +3,9 @@
   - id: INT, Primary Key, Auto Increment
   - name: STRING, Not Null
   - last_name: STRING, Not Null
+  - username: STRING, Not Null, Unique
   - email: STRING, Not Null
+  - password: STRING, Not Null, Pattern, Size
   - address: INT, Foreign Key -> addresses(id)
   - role: STRING, Not Null
 ### Table: patients
@@ -11,6 +13,7 @@
   - name: STRING, Not Null
   - last_name: STRING, Not Null
   - email: STRING, Not Null
+  - password: STRING, Not Null, Pattern, Size
   - date_of_birth: DATE, Not Null
   - gender: STRING, Not Null
   - address: INT, Foreign Key -> addresses(id)
@@ -19,6 +22,7 @@
   - name: STRING, Not Null
   - last_name: STRING, Not Null
   - email: STRING, Not Null
+  - password: STRING, Not Null, Pattern, Size
   - date_of_birth: DATE, Not Null
   - gender: STRING, Not Null
   - address: INT, Foreign Key -> addresses(id)
