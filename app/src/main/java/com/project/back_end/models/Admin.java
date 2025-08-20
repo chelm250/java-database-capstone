@@ -1,10 +1,20 @@
 package com.project.back_end.models;
 
+import java.lang.annotation.Inherited;
+
+import com.sun.tools.javac.jvm.Gen;
+
+@Entity
 public class Admin {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
 // @Entity annotation:
 //    - Marks the class as a JPA entity, which means it represents a table in the database.
 //    - It is required for persistence frameworks like Hibernate to map the class to a database table.
+
 
 // 1. 'id' field:
 //    - Type: private Long
