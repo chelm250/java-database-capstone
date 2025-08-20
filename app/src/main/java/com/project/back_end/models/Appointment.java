@@ -1,7 +1,118 @@
 package com.project.back_end.models;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.ManyToAny;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+
+@Entity
 public class Appointment {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "patient_id", referencedColumnName = "id")
+  @NotNull(message = "Patient cannot be null")
+  private Patient patient;
+
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "doctor_id", referencedColumnName = "id")
+  @NotNull(message = "Doctor cannot be null")
+  private Doctor doctor;
+
+  @Column(nullable = false)
+  @NotBlank(message = "Appointment time cannot be blank")
+  @Future(message = "Appointment time must be in the future")
+  private LocalDateTime appointmentTime;
+
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "clinic_id", referencedColumnName = "id")
+  @NotNull(message = "Clinic cannot be null")
+  private ClinicLocation clinicLocation;
+
+  @Enumerated(EnumType.ORDINAL)
+  @Column(nullable = false)
+  @NotNull(message = "Status cannot be null")
+  private AppointmentStatus appointmentStatus;
+
+  // Default constructor
+  public Appointment() {}
+
+  // Parametrized constructor
+  public Appointment(Patient patient, Doctor doctor, LocalDateTime appointmentTime, ClinicLocation clinicLocation, AppointmentStatus appointmentStatus) {
+    this.patient = patient;
+    this.doctor = doctor;
+    this.appointmentTime = appointmentTime;
+    this.clinicLocation = clinicLocation;
+    this.appointmentStatus = appointmentStatus;
+  }
+
+  // Getters and Setters
+  public int getId() {
+    return id;
+  }
+  public void setId(int id) {
+    this.id = id;
+  }
+  public Patient getPatient() {
+    return patient;
+  }
+  public void setPatient(Patient patient) {
+    this.patient = patient;
+  }
+  public Doctor getDoctor() {
+    return doctor;
+  }
+  public void setDoctor(Doctor doctor){
+    this.doctor = doctor;
+  }
+  public LocalDateTime getAppointmentTime() {
+    return appointmentTime;
+  }
+  public void setAppointmentTime(LocalDateTime appointmenDateTime) {
+    this.appointmentTime = appointmentTime;
+  }
+  public ClinicLocation getClinicLocation() {
+    return clinicLocation;
+  }
+  public void setClinicLocation(ClinicLocation clinicLocation) {
+    this.clinicLocation = clinicLocation;
+  }
+  public AppointmentStatus getAppointmentStatus() {
+    return appointmentStatus;
+  }
+  public void setAppointmentStatus(AppointmentStatus appointmentStatus){
+    this.appointmentStatus = appointmentStatus;
+  }
+
+  // toString method
+  @Override
+  public String toString() {
+    return "Appointment{" +
+            "id=" + id +
+            ", patient=" + patient +
+            ", doctor=" + doctor +
+            ", appointmentTime=" + appointmentTime +
+            ", clinicLocation=" + clinicLocation +
+            ", appointmentStatus=" + appointmentStatus +
+            '}';
+  }
   // @Entity annotation:
 //    - Marks the class as a JPA entity, meaning it represents a table in the database.
 //    - Required for persistence frameworks (e.g., Hibernate) to map the class to a database table.

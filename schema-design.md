@@ -32,7 +32,7 @@
   - patient_id: INT, Foreign Key -> patients(id)
   - doctor_id: INT, Foreign Key -> doctors(id)
   - appointment_time: DATETIME, Not Null
-  - clinic_location: INT, Foreign Key -> clinic_ocations(id)
+  - clinic_id: INT, Foreign Key -> clinic_ocations(id)
   - status: INT (0 = Scheduled, 1 = Completed, 2 = Cancelled)
 ### Table: clinic_locations
   - id: INT, Primary Key, Auto Increment

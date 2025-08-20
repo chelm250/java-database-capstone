@@ -18,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Admin {
@@ -60,7 +61,7 @@ public class Admin {
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "address", referencedColumnName = "id")
-    @NotBlank(message = "Address cannot be null")
+    @NotNull(message = "Address cannot be null")
     private Address address;
 
     @Column(nullable = false)
