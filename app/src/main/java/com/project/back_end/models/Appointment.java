@@ -26,7 +26,7 @@ public class Appointment {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "patient_id", referencedColumnName = "id")
@@ -66,10 +66,10 @@ public class Appointment {
   }
 
   // Getters and Setters
-  public int getId() {
+  public Long getId() {
     return id;
   }
-  public void setId(int id) {
+  public void setId(Long id) {
     this.id = id;
   }
   public Patient getPatient() {

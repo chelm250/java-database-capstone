@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -22,7 +23,7 @@ public class Admin {
     // Attributes of the Admin entity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     @NotBlank(message = "Name cannot be blank")
@@ -37,15 +38,15 @@ public class Admin {
     private String lastName;
 
     @Column(nullable = false, unique = true)
-    @NotBlank(message = "Username cannot be blank")
+    @NotNull(message = "Username cannot be null")
     @Size(max = 10, message = "Username cannot exceed 10 characters")
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Must contain only letters and numbers")
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @NotBlank(message = "Email cannot be blank")
     @Size(max = 50, message = "Email cannot exceed 50 characters")
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
+    @Email(message = "Invalid Email format")
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -81,10 +82,10 @@ public class Admin {
     }
 
     // Getters and Setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {
