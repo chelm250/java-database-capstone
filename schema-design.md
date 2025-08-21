@@ -17,6 +17,7 @@
   - date_of_birth: DATE, Not Null
   - gender: STRING, Not Null
   - address: INT, Foreign Key -> addresses(id)
+  - phone: INT, Not Null
 ### Table: doctors
   - id: INT, Primary Key, Auto Increment
   - name: STRING, Not Null
@@ -26,7 +27,10 @@
   - date_of_birth: DATE, Not Null
   - gender: STRING, Not Null
   - address: INT, Foreign Key -> addresses(id)
+  - phone: INT, Not Null
+  - speciality: String, Not Null
   - clinic_location: INT, Foreign Key -> clinic_ocations(id)
+  - available_time: List<String>, Not Null
 ### Table: appointments
   - id: INT, Primary Key, Auto Increment
   - patient_id: INT, Foreign Key -> patients(id)
