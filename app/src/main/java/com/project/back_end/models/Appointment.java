@@ -51,7 +51,7 @@ public class Appointment {
   @Enumerated(EnumType.ORDINAL)
   @Column(nullable = false)
   @NotNull(message = "Status cannot be null")
-  private AppointmentStatus appointmentStatus;
+  private AppointmentStatus status;
 
   // Default constructor
   public Appointment() {}
@@ -62,7 +62,7 @@ public class Appointment {
     this.doctor = doctor;
     this.appointmentTime = appointmentTime;
     this.clinicLocation = clinicLocation;
-    this.appointmentStatus = appointmentStatus;
+    this.status = appointmentStatus;
   }
 
   // Getters and Setters
@@ -97,10 +97,10 @@ public class Appointment {
     this.clinicLocation = clinicLocation;
   }
   public AppointmentStatus getAppointmentStatus() {
-    return appointmentStatus;
+    return status;
   }
-  public void setAppointmentStatus(AppointmentStatus appointmentStatus){
-    this.appointmentStatus = appointmentStatus;
+  public void setAppointmentStatus(AppointmentStatus status){
+    this.status = status;
   }
 
   // toString method
@@ -112,7 +112,7 @@ public class Appointment {
             ", doctor=" + doctor +
             ", appointmentTime=" + appointmentTime +
             ", clinicLocation=" + clinicLocation +
-            ", appointmentStatus=" + appointmentStatus +
+            ", appointmentStatus=" + status +
             '}';
   }
 

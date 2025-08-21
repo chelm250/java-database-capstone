@@ -1,6 +1,110 @@
 package com.project.back_end.models;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+@Entity
 public class Prescription {
+
+  @Id
+  @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+  private Long id;
+
+  @OneToOne(optional = false)
+  @JoinColumn(name = "patient_name", referencedColumnName = "name")
+  @NotNull(message = "Patient name cannot be null")
+  private String patientName;
+
+  @OneToOne(optional = false)
+  @JoinColumn(name = "appointment_id", referencedColumnName = "name")
+  @NotNull(message = "Appointment id cannot be null")
+  private String appointmentId;
+
+  @Column(nullable = false)
+  @NotBlank(message = "Medication cannot be blank")
+  @Size(min = 3, max = 100, message = "Medication must be between 3 and 100 characters")
+  private String medication;
+
+  @Column(nullable = false)
+  @NotBlank(message = "Dosage cannot be blank")
+  @Size(min = 3, max = 100, message = "Dosage must be between 3 and 100 characters")
+  private String dosage;
+
+  @Column(nullable = true)
+  @Size(max = 200, message = "Doctor notes cannot exceed 200 characters")
+  private String doctorNotes;
+
+  // Default constructor
+  public Prescription() {}
+
+  // Parameterized constructor
+  public Prescription(String patientName, String appointmentId, String medication, String dosage, String doctorNotes) {
+    this.patientName = patientName;
+    this.appointmentId = appointmentId;
+    this.medication = medication;
+    this.dosage = dosage;
+    this.doctorNotes = doctorNotes;
+  }
+
+  // Getters and Setters
+  public Long getId() {
+    return id;
+  }
+  public void setId(Long id) {
+    this.id = id;
+  }
+  public String getPatientName() {
+    return patientName;
+  }
+  public void setPatientName(String patientName) {
+    this.patientName = patientName;
+  }
+  public String getAppointmentId() {
+    return appointmentId;
+  }
+  public void setAppointmentId(String appointmentId) {
+    this.appointmentId = appointmentId;
+  }
+  public String getMedication() {
+    return medication;
+  }
+  public void setMedication(String medication) {
+    this.medication = medication;
+  }
+  public String getDosage() {
+    return dosage;
+  } 
+  public void setDosage(String dosage) {
+    this.dosage = dosage;
+  }
+  public String getDoctorNotes() {
+    return doctorNotes;
+  }
+  public void setDoctorNotes(String doctorNotes) {
+    this.doctorNotes = doctorNotes;
+  }
+
+  // toString method for debugging
+  @Override
+  public String toString() {
+    return "Prescription{" +
+            "id=" + id +
+            ", patientName='" + patientName + '\'' +
+            ", appointmentId='" + appointmentId + '\'' +
+            ", medication='" + medication + '\'' +
+            ", dosage='" + dosage + '\'' +
+            ", doctorNotes='" + doctorNotes + '\'' +
+            '}';
+  }
+
 
   // @Document annotation:
 //    - Marks the class as a MongoDB document (a collection in MongoDB).
