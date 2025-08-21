@@ -1,24 +1,20 @@
 package com.project.back_end.models;
 
-import java.lang.annotation.Inherited;
-
-import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.tools.javac.jvm.Gen;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.CascadeType;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Admin {

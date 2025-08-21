@@ -1,10 +1,10 @@
 package com.project.back_end.models;
 
-import com.project.back_end.enums.AppointmentStatus;
-
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import com.project.back_end.enums.AppointmentStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -86,7 +86,7 @@ public class Appointment {
   public LocalDateTime getAppointmentTime() {
     return appointmentTime;
   }
-  public void setAppointmentTime(LocalDateTime appointmenDateTime) {
+  public void setAppointmentTime(LocalDateTime appointmentTime) {
     this.appointmentTime = appointmentTime;
   }
   public ClinicLocation getClinicLocation() {
