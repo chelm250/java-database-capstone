@@ -1,6 +1,8 @@
 package com.project.back_end.models;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -113,6 +115,18 @@ public class Appointment {
             ", appointmentStatus=" + appointmentStatus +
             '}';
   }
+
+  // Methods to get appointment date and time
+  public LocalDateTime getEndTime() {
+    return appointmentTime.plusHours(1);
+  }
+  public LocalDate getAppointmentDate() {
+    return appointmentTime.toLocalDate();
+  }
+  public LocalTime getAppointmentTimeOnly() {
+    return appointmentTime.toLocalTime();
+  }
+  
   // @Entity annotation:
 //    - Marks the class as a JPA entity, meaning it represents a table in the database.
 //    - Required for persistence frameworks (e.g., Hibernate) to map the class to a database table.
