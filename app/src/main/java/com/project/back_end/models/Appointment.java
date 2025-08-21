@@ -1,5 +1,6 @@
 package com.project.back_end.models;
 
+import java.beans.Transient;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -116,12 +117,17 @@ public class Appointment {
   }
 
   // Methods to get appointment date and time
+  @Transient
   public LocalDateTime getEndTime() {
     return appointmentTime.plusHours(1);
   }
+
+  @Transient
   public LocalDate getAppointmentDate() {
     return appointmentTime.toLocalDate();
   }
+  
+  @Transient
   public LocalTime getAppointmentTimeOnly() {
     return appointmentTime.toLocalTime();
   }
