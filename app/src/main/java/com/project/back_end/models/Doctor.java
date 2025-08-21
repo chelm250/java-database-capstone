@@ -27,7 +27,7 @@ public class Doctor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     @NotBlank(message = "Name cannot be blank")
@@ -42,7 +42,7 @@ public class Doctor {
     private String lastName;
 
     @Column(nullable = false, unique = true)
-    @NotBlank(message = "Email cannot be blank")
+    @NotNull(message = "Email cannot be blank")
     @Size(max = 50, message = "Email cannot exceed 50 characters")
     @Email(message = "Invalid Email format")
     private String email;
@@ -103,10 +103,10 @@ public class Doctor {
     }
 
     // Getters and Setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {
