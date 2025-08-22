@@ -28,7 +28,7 @@ public class ClinicLocation {
     private String name;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_name", referencedColumnName = "id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     @NotNull(message = "Address cannot be null")
     private Address address;
 

@@ -16,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -65,8 +66,8 @@ public class Doctor {
     @NotNull(message = "Gender cannot be null")
     private Gender gender;
 
-    @Column(nullable = false)
-    @JoinColumn(name = "address", referencedColumnName = "id")
+    @OneToOne(optional = false, cascade = jakarta.persistence.CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     @NotNull(message = "Address cannot be null")
     private Address address;
 
