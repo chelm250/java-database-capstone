@@ -44,19 +44,20 @@ public class Prescription {
 
   @NotBlank(message = "Pharmacy name cannot be blank")
   @Size(max = 100, message = "Pharmacy name cannot exceed 100 characters")
-  private String pharmacy;
+  private String pharmacyName;
 
   // Default constructor
   public Prescription() {}
 
   // Parameterized constructor
-  public Prescription(String patientName, Long appointmentId, String medication, String dosage, Integer refillCount, String doctorNotes) {
+  public Prescription(String patientName, Long appointmentId, String medication, String dosage, Integer refillCount, String doctorNotes, String pharmacyName) {
     this.patientName = patientName;
     this.appointmentId = appointmentId;
     this.medication = medication;
     this.dosage = dosage;
     this.refillCount = refillCount;
     this.doctorNotes = doctorNotes;
+    this.pharmacyName = pharmacyName;
   }
 
   // Getters and Setters
@@ -71,6 +72,12 @@ public class Prescription {
   }
   public void setPatientName(String patientName) {
     this.patientName = patientName;
+  }
+  public String getDoctortName() {
+    return doctortName;
+  }
+  public void setDoctortName(String doctortName) {
+    this.doctortName = doctortName;
   }
   public Long getAppointmentId() {
     return appointmentId;
@@ -102,6 +109,12 @@ public class Prescription {
   public void setDoctorNotes(String doctorNotes) {
     this.doctorNotes = doctorNotes;
   }
+  public String getPharmacyName() {
+    return pharmacyName;
+  }
+  public void setPharmacyName(String pharmacyName) {
+    this.pharmacyName = pharmacyName;
+  }
 
   // toString method for debugging
   @Override
@@ -109,11 +122,13 @@ public class Prescription {
     return "Prescription{" +
             "id=" + id +
             ", patientName='" + patientName + '\'' +
+            ", pharmacyName='" + pharmacyName + '\'' +
             ", appointmentId='" + appointmentId + '\'' +
             ", medication='" + medication + '\'' +
             ", dosage='" + dosage + '\'' +
             ", refillCount=" + refillCount +
-            ", doctorNotes='" + doctorNotes + '\'' +
+            ", doctor notes='" + doctorNotes + '\'' +
+            ", pharmacy='" + pharmacyName + '\'' +
             '}';
   }
 
