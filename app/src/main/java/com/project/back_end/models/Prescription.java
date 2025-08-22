@@ -1,56 +1,61 @@
 package com.project.back_end.models;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-@Entity
+@Document(collection = "prescriptions")
 public class Prescription {
 
   @Id
   @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
   private Long id;
 
-  @OneToOne(optional = false)
-  @JoinColumn(name = "patient_name", referencedColumnName = "name")
+  @Size(min = 3, max = 100, message = "Patient name must be between 3 and 100 characters")
   @NotNull(message = "Patient name cannot be null")
   private String patientName;
 
-  @OneToOne(optional = false)
-  @JoinColumn(name = "appointment_id", referencedColumnName = "name")
-  @NotNull(message = "Appointment id cannot be null")
-  private String appointmentId;
+  @Size(min = 3, max = 100, message = "Patient name must be between 3 and 100 characters")
+  @NotNull(message = "Patient name cannot be null")
+  private String doctortName;
 
-  @Column(nullable = false)
+  @NotNull(message = "Appointment id cannot be null")
+  private Long appointmentId;
+
   @NotBlank(message = "Medication cannot be blank")
   @Size(min = 3, max = 100, message = "Medication must be between 3 and 100 characters")
   private String medication;
 
-  @Column(nullable = false)
   @NotBlank(message = "Dosage cannot be blank")
-  @Size(min = 3, max = 100, message = "Dosage must be between 3 and 100 characters")
+  @Size(min = 3, max = 20, message = "Dosage must be between 3 and 100 characters")
   private String dosage;
 
-  @Column(nullable = true)
+  @NotNull(message = "Refill count cannot be null")
+  @Size(min = 1, max = 10, message = "Refill count must be between 1 and 10")
+  private Integer refillCount;
+
   @Size(max = 200, message = "Doctor notes cannot exceed 200 characters")
   private String doctorNotes;
+
+  @NotBlank(message = "Pharmacy name cannot be blank")
+  @Size(max = 100, message = "Pharmacy name cannot exceed 100 characters")
+  private String pharmacy;
 
   // Default constructor
   public Prescription() {}
 
   // Parameterized constructor
-  public Prescription(String patientName, String appointmentId, String medication, String dosage, String doctorNotes) {
+  public Prescription(String patientName, Long appointmentId, String medication, String dosage, Integer refillCount, String doctorNotes) {
     this.patientName = patientName;
     this.appointmentId = appointmentId;
     this.medication = medication;
     this.dosage = dosage;
+    this.refillCount = refillCount;
     this.doctorNotes = doctorNotes;
   }
 
@@ -67,10 +72,10 @@ public class Prescription {
   public void setPatientName(String patientName) {
     this.patientName = patientName;
   }
-  public String getAppointmentId() {
+  public Long getAppointmentId() {
     return appointmentId;
   }
-  public void setAppointmentId(String appointmentId) {
+  public void setAppointmentId(Long appointmentId) {
     this.appointmentId = appointmentId;
   }
   public String getMedication() {
@@ -84,6 +89,12 @@ public class Prescription {
   } 
   public void setDosage(String dosage) {
     this.dosage = dosage;
+  }
+  public Integer getRefillCount() {
+    return refillCount;
+  }
+  public void setRefillCount(Integer refillCount) {
+    this.refillCount = refillCount;
   }
   public String getDoctorNotes() {
     return doctorNotes;
@@ -101,6 +112,7 @@ public class Prescription {
             ", appointmentId='" + appointmentId + '\'' +
             ", medication='" + medication + '\'' +
             ", dosage='" + dosage + '\'' +
+            ", refillCount=" + refillCount +
             ", doctorNotes='" + doctorNotes + '\'' +
             '}';
   }
