@@ -57,7 +57,7 @@ public class Admin {
     private String password;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address", referencedColumnName = "id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     @NotNull(message = "Address cannot be null")
     private Address address;
 

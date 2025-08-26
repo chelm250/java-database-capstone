@@ -1,98 +1,4 @@
-
-
-INSERT INTO doctor (name, lastname, email, password, dateofbirth, gender, address, phone, speciality, cliniclocation) VALUES
-('Emily', 'Adams', 'dr.adams@example.com', 'pass12345', '12-04-1980', 'FEMALE', 1, '555-101-2020', 'Cardiologist', 1),
-('Mark', 'Johnson', 'dr.johnson@example.com', 'secure4567', '23-09-1975', 'MALE', 2, '555-202-3030', 'Neurologist', 2),
-('Sarah', 'Lee', 'dr.lee@example.com', 'leePass987', '15-06-1982', 'FEMALE', 3, '555-303-4040', 'Orthopedist', 3),
-('Tom', 'Wilson', 'dr.wilson@example.com', 'w!ls0nPwd', '30-11-1978', 'MALE', 4, '555-404-5050', 'Pediatrician', 4),
-('Alice', 'Brown', 'dr.brown@example.com', 'brownie123', '08-01-1985', 'FEMALE', 5, '555-505-6060', 'Dermatologist', 5),
-('Taylor', 'Grant', 'dr.taylor@example.com', 'taylor321', '19-03-1983', 'MALE', 6, '555-606-7070', 'Cardiologist', 1),
-('Sam', 'White', 'dr.white@example.com', 'whiteSecure1', '25-07-1979', 'MALE', 7, '555-707-8080', 'Neurologist', 2),
-('Emma', 'Clark', 'dr.clark@example.com', 'clarkPass456', '14-05-1986', 'FEMALE', 8, '555-808-9090', 'Orthopedist', 3),
-('Olivia', 'Davis', 'dr.davis@example.com', 'davis789', '03-12-1981', 'FEMALE', 9, '555-909-0101', 'Pediatrician', 4),
-('Henry', 'Miller', 'dr.miller@example.com', 'millertime!', '17-08-1974', 'MALE', 10, '555-010-1111', 'Dermatologist', 5),
-('Ella', 'Moore', 'dr.moore@example.com', 'ellapass33', '28-02-1987', 'FEMALE', 11, '555-111-2222', 'Cardiologist', 1),
-('Leo', 'Martin', 'dr.martin@example.com', 'martinpass', '10-10-1980', 'MALE', 12, '555-222-3333', 'Neurologist', 2),
-('Ivy', 'Jackson', 'dr.jackson@example.com', 'jackson11', '06-06-1984', 'FEMALE', 13, '555-333-4444', 'Orthopedist', 3),
-('Owen', 'Thomas', 'dr.thomas@example.com', 'thomasPWD', '01-09-1976', 'MALE', 14, '555-444-5555', 'Pediatrician', 4),
-('Ava', 'Hall', 'dr.hall@example.com', 'hallhall', '22-12-1982', 'FEMALE', 15, '555-555-6666', 'Dermatologist', 5),
-('Mia', 'Green', 'dr.green@example.com', 'greenleaf', '07-07-1985', 'FEMALE', 16, '555-666-7777', 'Cardiologist', 1),
-('Jack', 'Baker', 'dr.baker@example.com', 'bakeitup', '03-03-1977', 'MALE', 17, '555-777-8888', 'Neurologist', 2),
-('Nora', 'Walker', 'dr.walker@example.com', 'walkpass12', '11-11-1983', 'FEMALE', 18, '555-888-9999', 'Orthopedist', 3),
-('Liam', 'Young', 'dr.young@example.com', 'young123', '05-05-1980', 'MALE', 19, '555-999-0000', 'Pediatrician', 4),
-('Zoe', 'King', 'dr.king@example.com', 'kingkong1', '10-10-1987', 'FEMALE', 20, '555-000-1111', 'Dermatologist', 5),
-('Lily', 'Scott', 'dr.scott@example.com', 'scottish', '01-01-1981', 'FEMALE', 21, '555-111-2223', 'Cardiologist', 1),
-('Lucas', 'Evans', 'dr.evans@example.com', 'evansEv1', '04-04-1979', 'MALE', 22, '555-222-3334', 'Neurologist', 2),
-('Grace', 'Turner', 'dr.turner@example.com', 'turnerBurner', '09-09-1984', 'FEMALE', 23, '555-333-4445', 'Orthopedist', 3),
-('Ethan', 'Hill', 'dr.hill@example.com', 'hillclimb', '06-06-1978', 'MALE', 24, '555-444-5556', 'Pediatrician', 4),
-('Ruby', 'Ward', 'dr.ward@example.com', 'wardWard', '10-10-1987', 'FEMALE', 25, '555-555-6667', 'Dermatologist', 5);
-
-INSERT INTO availabletimes (id, availabletimes) VALUES
-(1, '09:00-10:00'), (1, '10:00-11:00'), (1, '11:00-12:00'), (1, '14:00-15:00'),
-(2, '10:00-11:00'), (2, '11:00-12:00'), (2, '14:00-15:00'), (2, '15:00-16:00'),
-(3, '09:00-10:00'), (3, '11:00-12:00'), (3, '14:00-15:00'), (3, '16:00-17:00'),
-(4, '09:00-10:00'), (4, '10:00-11:00'), (4, '15:00-16:00'), (4, '16:00-17:00'),
-(5, '09:00-10:00'), (5, '10:00-11:00'), (5, '14:00-15:00'), (5, '15:00-16:00'),
-(6, '09:00-10:00'), (6, '10:00-11:00'), (6, '11:00-12:00'), (6, '14:00-15:00'),
-(7, '09:00-10:00'), (7, '10:00-11:00'), (7, '15:00-16:00'), (7, '16:00-17:00'),
-(8, '10:00-11:00'), (8, '11:00-12:00'), (8, '14:00-15:00'), (8, '15:00-16:00'),
-(9, '09:00-10:00'), (9, '11:00-12:00'), (9, '13:00-14:00'), (9, '14:00-15:00'),
-(10, '10:00-11:00'), (10, '11:00-12:00'), (10, '14:00-15:00'), (10, '16:00-17:00'),
-(11, '09:00-10:00'), (11, '12:00-13:00'), (11, '14:00-15:00'), (11, '15:00-16:00'),
-(12, '10:00-11:00'), (12, '11:00-12:00'), (12, '13:00-14:00'), (12, '14:00-15:00'),
-(13, '13:00-14:00'), (13, '14:00-15:00'), (13, '15:00-16:00'), (13, '16:00-17:00'),
-(14, '09:00-10:00'), (14, '10:00-11:00'), (14, '14:00-15:00'), (14, '16:00-17:00'),
-(15, '10:00-11:00'), (15, '11:00-12:00'), (15, '13:00-14:00'), (15, '14:00-15:00'),
-(16, '09:00-10:00'), (16, '11:00-12:00'), (16, '14:00-15:00'), (16, '16:00-17:00'),
-(17, '09:00-10:00'), (17, '10:00-11:00'), (17, '11:00-12:00'), (17, '12:00-13:00'),
-(18, '09:00-10:00'), (18, '10:00-11:00'), (18, '11:00-12:00'), (18, '15:00-16:00'),
-(19, '13:00-14:00'), (19, '14:00-15:00'), (19, '15:00-16:00'), (19, '16:00-17:00'),
-(20, '10:00-11:00'), (20, '13:00-14:00'), (20, '14:00-15:00'), (20, '15:00-16:00'),
-(21, '09:00-10:00'), (21, '10:00-11:00'), (21, '14:00-15:00'), (21, '15:00-16:00'),
-(22, '10:00-11:00'), (22, '11:00-12:00'), (22, '14:00-15:00'), (22, '16:00-17:00'),
-(23, '11:00-12:00'), (23, '13:00-14:00'), (23, '15:00-16:00'), (23, '16:00-17:00'),
-(24, '12:00-13:00'), (24, '13:00-14:00'), (24, '14:00-15:00'), (24, '15:00-16:00'),
-(25, '09:00-10:00'), (25, '10:00-11:00'), (25, '14:00-15:00'), (25, '15:00-16:00');
-
-INSERT INTO patient (name, lastname, email, password, dateofbirth, gender, address, phone) VALUES
-('Noah', 'Reed', 'n.reed@example.com', 'reedNoah', '13-03-1994', 'MALE', 26, '555-666-9990'),
-('Harper', 'Cole', 'h.cole@example.com', 'harperC', '29-07-1986', 'FEMALE', 27, '555-777-0001'),
-('Logan', 'Price', 'l.price@example.com', 'loganP!', '18-11-1992', 'MALE', 28, '555-888-1112'),
-('Aria', 'Bell', 'a.bell@example.com', 'ariaBell', '04-04-1989', 'FEMALE', 29, '555-999-2223'),
-('Caleb', 'Brooks', 'c.brooks@example.com', 'brooksC', '22-06-1990', 'MALE', 30, '555-000-3334'),
-('Scarlett', 'Hayes', 's.hayes@example.com', 'scarlettH', '10-10-1987', 'FEMALE', 31, '555-111-4445'),
-('Nathan', 'Foster', 'n.foster@example.com', 'nateFoster', '07-01-1993', 'MALE', 32, '555-222-5556'),
-('Victoria', 'Barnes', 'v.barnes@example.com', 'vickyBarnes', '16-08-1988', 'FEMALE', 33, '555-333-6667'),
-('Isaac', 'Perry', 'i.perry@example.com', 'isaacP', '01-05-1991', 'MALE', 34, '555-444-7778'),
-('Penelope', 'Russell', 'p.russell@example.com', 'penelopeR', '12-12-1986', 'FEMALE', 35, '555-555-8889');
-
-INSERT INTO appointment (patient, doctor, appointmentTime, clinicLocation, status) VALUES
-(1, 1, '2025-09-01 09:00:00', 1, 0),
-(2, 2, '2025-09-01 10:30:00', 2, 0),
-(3, 3, '2025-09-02 11:00:00', 3, 0),
-(4, 4, '2025-09-02 14:00:00', 4, 1),
-(5, 5, '2025-09-03 08:30:00', 5, 0),
-(6, 1, '2025-09-03 09:30:00', 1, 0),
-(7, 2, '2025-09-04 10:00:00', 2, 1),
-(8, 3, '2025-09-04 11:30:00', 3, 0),
-(9, 4, '2025-09-05 13:00:00', 4, 0);
-
--- Status codes: 0 = Scheduled, 1 = Completed, 2 = Canceled
-
-INSERT INTO admin (name, lastname, username, email, password, role) VALUES
-('Christian', 'Vermeer', 'admin.christian', 'admin.christian@example.com', 'secureAdminPass!', 'ADMIN');
-
-INSERT INTO cliniclocation (name, address) VALUES
-('Central Heart Clinic', 36),
-('NeuroCare Center', 37),
-('OrthoMotion Clinic', 38),
-('Pediatric Health Hub', 39),
-('Skin & Derm Studio', 40);
-
-
-
-
-INSERT INTO address (street, number, interiornumber, postalcode, city, country) VALUES
+INSERT INTO address (street, number, interior_number, postal_code, city, country) VALUES
 ('Wellness Blvd', 123, NULL, '1011AB', 'Amsterdam', 'Netherlands'),
 ('Brainwave Ave', 456, 'A1', '3011AA', 'Rotterdam', 'Netherlands'),
 ('Joint St', 789, NULL, '3511AD', 'Utrecht', 'Netherlands'),
@@ -142,12 +48,200 @@ INSERT INTO address (street, number, interiornumber, postalcode, city, country) 
 ('Opal Road', 198, 'X24', '3520ST', 'Utrecht', 'Netherlands'),
 ('Quartz Lane', 209, NULL, '5620TU', 'Eindhoven', 'Netherlands'),
 ('Emerald Boulevard', 220, 'Y25', '2520UV', 'The Hague', 'Netherlands'),
+('Jade Boulevard', 165, NULL, '2519PQ', 'The Hague', 'Netherlands'),
+('Sapphire Street', 176, 'W23', '1020QR', 'Amsterdam', 'Netherlands'),
+('Topaz Avenue', 187, NULL, '3020RS', 'Rotterdam', 'Netherlands'),
+('Opal Road', 198, 'X24', '3520ST', 'Utrecht', 'Netherlands'),
+('Quartz Lane', 209, NULL, '5620TU', 'Eindhoven', 'Netherlands'),
+('Emerald Boulevard', 220, 'Y25', '2520UV', 'The Hague', 'Netherlands'),
 ('Garden Blvd', 119, 'T20', '2518JK', 'The Hague', 'Netherlands');
 
+INSERT INTO clinic_location (name, address_id) VALUES
+('Central Heart Clinic', 36),
+('NeuroCare Center', 37),
+('OrthoMotion Clinic', 38),
+('Pediatric Health Hub', 39),
+('Skin & Derm Studio', 40);
 
-INSERT INTO pharmacy (name, address) VALUES
+INSERT INTO doctor (name, last_name, email, password, date_of_birth, gender, address_id, phone, specialty, clinic_location) VALUES
+('Emily', 'Adams', 'dr.adams@example.com', 'pass12345', '1980-04-12', 'FEMALE', 1, '5551012020', 'Cardiologist', 1),
+('Mark', 'Johnson', 'dr.johnson@example.com', 'secure4567', '1975-09-23', 'MALE', 2, '5552023030', 'Neurologist', 2),
+('Sarah', 'Lee', 'dr.lee@example.com', 'leePass987', '1982-06-15', 'FEMALE', 3, '5553034040', 'Orthopedist', 3),
+('Tom', 'Wilson', 'dr.wilson@example.com', 'w!ls0nPwd', '1978-11-30', 'MALE', 4, '5554045050', 'Pediatrician', 4),
+('Alice', 'Brown', 'dr.brown@example.com', 'brownie123', '1985-01-08', 'FEMALE', 5, '5555056060', 'Dermatologist', 5),
+('Taylor', 'Grant', 'dr.taylor@example.com', 'taylor321', '1983-03-19', 'MALE', 6, '5556067070', 'Cardiologist', 1),
+('Sam', 'White', 'dr.white@example.com', 'whiteSecure1', '1979-07-25', 'MALE', 7, '5557078080', 'Neurologist', 2),
+('Emma', 'Clark', 'dr.clark@example.com', 'clarkPass456', '1986-05-14', 'FEMALE', 8, '5558089090', 'Orthopedist', 3),
+('Olivia', 'Davis', 'dr.davis@example.com', 'davis789', '1981-12-03', 'FEMALE', 9, '5559090101', 'Pediatrician', 4),
+('Henry', 'Miller', 'dr.miller@example.com', 'millertime!', '1974-08-17', 'MALE', 10, '5550101111', 'Dermatologist', 5),
+('Ella', 'Moore', 'dr.moore@example.com', 'ellapass33', '1987-02-28', 'FEMALE', 11, '5551112222', 'Cardiologist', 1),
+('Leo', 'Martin', 'dr.martin@example.com', 'martinpass', '1980-10-10', 'MALE', 12, '5552223333', 'Neurologist', 2),
+('Ivy', 'Jackson', 'dr.jackson@example.com', 'jackson11', '1984-06-06', 'FEMALE', 13, '5553334444', 'Orthopedist', 3),
+('Owen', 'Thomas', 'dr.thomas@example.com', 'thomasPWD', '1976-09-01', 'MALE', 14, '5554445555', 'Pediatrician', 4),
+('Ava', 'Hall', 'dr.hall@example.com', 'hallhall', '1982-12-22', 'FEMALE', 15, '5555556666', 'Dermatologist', 5),
+('Mia', 'Green', 'dr.green@example.com', 'greenleaf', '1985-07-07', 'FEMALE', 16, '5556667777', 'Cardiologist', 1),
+('Jack', 'Baker', 'dr.baker@example.com', 'bakeitup', '1977-03-03', 'MALE', 17, '5557778888', 'Neurologist', 2),
+('Nora', 'Walker', 'dr.walker@example.com', 'walkpass12', '1983-11-11', 'FEMALE', 18, '5558889999', 'Orthopedist', 3),
+('Liam', 'Young', 'dr.young@example.com', 'young123', '1980-05-05', 'MALE', 19, '5559990000', 'Pediatrician', 4),
+('Zoe', 'King', 'dr.king@example.com', 'kingkong1', '1987-10-10', 'FEMALE', 20, '5550001111', 'Dermatologist', 5),
+('Lily', 'Scott', 'dr.scott@example.com', 'scottish', '1981-01-01', 'FEMALE', 21, '5551112223', 'Cardiologist', 1),
+('Lucas', 'Evans', 'dr.evans@example.com', 'evansEv1', '1979-04-04', 'MALE', 22, '5552223334', 'Neurologist', 2),
+('Grace', 'Turner', 'dr.turner@example.com', 'turnerBurner', '1984-09-09', 'FEMALE', 23, '5553334445', 'Orthopedist', 3),
+('Ethan', 'Hill', 'dr.hill@example.com', 'hillclimb', '1978-06-06', 'MALE', 24, '5554445556', 'Pediatrician', 4),
+('Ruby', 'Ward', 'dr.ward@example.com', 'wardWard', '1987-10-10', 'FEMALE', 25, '5555556667', 'Dermatologist', 5);
+
+INSERT INTO doctor_available_times (doctor_id, available_times) VALUES
+(26, '10:00-11:00'), (26, '11:00-12:00'), (26, '14:00-15:00'), (26, '15:00-16:00'),
+(27, '09:00-10:00'), (27, '11:00-12:00'), (27, '14:00-15:00'), (27, '16:00-17:00'),
+(28, '09:00-10:00'), (28, '10:00-11:00'), (28, '15:00-16:00'), (28, '16:00-17:00'),
+(29, '09:00-10:00'), (29, '10:00-11:00'), (29, '14:00-15:00'), (29, '15:00-16:00'),
+(30, '09:00-10:00'), (30, '10:00-11:00'), (30, '11:00-12:00'), (30, '14:00-15:00'),
+(31, '09:00-10:00'), (31, '10:00-11:00'), (31, '15:00-16:00'), (31, '16:00-17:00'),
+(32, '10:00-11:00'), (32, '11:00-12:00'), (32, '14:00-15:00'), (32, '15:00-16:00'),
+(33, '09:00-10:00'), (33, '11:00-12:00'), (33, '13:00-14:00'), (33, '14:00-15:00'),
+(34, '10:00-11:00'), (34, '11:00-12:00'), (34, '14:00-15:00'), (34, '16:00-17:00'),
+(35, '09:00-10:00'), (35, '12:00-13:00'), (35, '14:00-15:00'), (35, '15:00-16:00'),
+(36, '10:00-11:00'), (36, '11:00-12:00'), (36, '13:00-14:00'), (36, '14:00-15:00'),
+(37, '13:00-14:00'), (37, '14:00-15:00'), (37, '15:00-16:00'), (37, '16:00-17:00'),
+(38, '09:00-10:00'), (38, '10:00-11:00'), (38, '14:00-15:00'), (38, '16:00-17:00'),
+(39, '10:00-11:00'), (39, '11:00-12:00'), (39, '13:00-14:00'), (39, '14:00-15:00'),
+(40, '09:00-10:00'), (40, '11:00-12:00'), (40, '14:00-15:00'), (40, '16:00-17:00'),
+(41, '09:00-10:00'), (41, '10:00-11:00'), (41, '11:00-12:00'), (41, '12:00-13:00'),
+(42, '09:00-10:00'), (42, '10:00-11:00'), (42, '11:00-12:00'), (42, '15:00-16:00'),
+(43, '13:00-14:00'), (43, '14:00-15:00'), (43, '15:00-16:00'), (43, '16:00-17:00'),
+(44, '10:00-11:00'), (44, '13:00-14:00'), (44, '14:00-15:00'), (44, '15:00-16:00'),
+(45, '09:00-10:00'), (45, '10:00-11:00'), (45, '14:00-15:00'), (45, '15:00-16:00'),
+(46, '10:00-11:00'), (46, '11:00-12:00'), (46, '14:00-15:00'), (46, '16:00-17:00'),
+(47, '11:00-12:00'), (47, '13:00-14:00'), (47, '15:00-16:00'), (47, '16:00-17:00'),
+(48, '12:00-13:00'), (48, '13:00-14:00'), (48, '14:00-15:00'), (48, '15:00-16:00'),
+(49, '12:00-13:00'), (49, '13:00-14:00'), (49, '14:00-15:00'), (49, '15:00-16:00'),
+(50, '09:00-10:00'), (50, '10:00-11:00'), (50, '14:00-15:00'), (50, '15:00-16:00');
+
+INSERT INTO patient (name, last_name, email, password, date_of_birth, gender, address_id, phone) VALUES
+('Noah', 'Reed', 'n.reed@example.com', 'reedNoah', '1994-03-13', 'MALE', 26, '5556669990'),
+('Harper', 'Cole', 'h.cole@example.com', 'harperC', '1986-07-29', 'FEMALE', 27, '5557770001'),
+('Logan', 'Price', 'l.price@example.com', 'loganP!', '1992-11-18', 'MALE', 28, '5558881112'),
+('Aria', 'Bell', 'a.bell@example.com', 'ariaBell', '1989-04-04', 'FEMALE', 29, '5559992223'),
+('Caleb', 'Brooks', 'c.brooks@example.com', 'brooksC', '1990-06-22', 'MALE', 30, '5550003334'),
+('Scarlett', 'Hayes', 's.hayes@example.com', 'scarlettH', '1987-10-10', 'FEMALE', 31, '5551114445'),
+('Nathan', 'Foster', 'n.foster@example.com', 'nateFoster', '1993-01-07', 'MALE', 32, '5552225556'),
+('Victoria', 'Barnes', 'v.barnes@example.com', 'vickyBarnes', '1988-08-16', 'FEMALE', 33, '5553336667'),
+('Isaac', 'Perry', 'i.perry@example.com', 'isaacP', '1991-05-01', 'MALE', 34, '5554447778'),
+('Penelope', 'Russell', 'p.russell@example.com', 'penelopeR', '1986-12-12', 'FEMALE', 35, '5555558889');
+
+INSERT INTO appointment (patient_id, doctor_id, appointment_time, clinic_id, status) VALUES
+(1, 26, '2025-09-01 09:00:00', 1, 0),
+(2, 27, '2025-09-01 10:30:00', 2, 0),
+(3, 28, '2025-09-02 11:00:00', 3, 0),
+(4, 29, '2025-09-02 14:00:00', 4, 1),
+(5, 30, '2025-09-03 08:30:00', 5, 0),
+(6, 31, '2025-09-03 09:30:00', 1, 0),
+(7, 32, '2025-09-04 10:00:00', 2, 1),
+(8, 33, '2025-09-04 11:30:00', 3, 0),
+(9, 34, '2025-09-05 13:00:00', 4, 0);
+
+-- Status codes: 0 = Scheduled, 1 = Completed, 2 = Canceled
+
+INSERT INTO admin (name, last_name, username, email, password, role, address_id) VALUES
+('Christian', 'Vermeer', 'adminchris', 'admin.christian@example.com', 'secureAdminPass!', 'ADMIN', 1);
+
+INSERT INTO pharmacy (name, address_id) VALUES
 ('HealthPlus Pharmacy', 41),
 ('MediCare Drugs', 42),
 ('Wellness Pharmacy', 43),
 ('CareFirst Pharmacy', 44),
 ('PharmaTrust', 45);
+
+-- Prescriptions sample data MongoDB
+db.prescriptions.insertMany([
+  {
+    _id: ObjectId("6807dd712725f013281e7301"),
+    patientName: "Noah Reed",
+    appointmentId: 101,
+    medication: "Paracetamol",
+    dosage: "500mg",
+    doctorNotes: "Take 1 tablet every 6 hours.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7302"),
+    patientName: "Harper Cole",
+    appointmentId: 102,
+    medication: "Ibuprofen",
+    dosage: "400mg",
+    doctorNotes: "Take after meals.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7303"),
+    patientName: "Logan Price",
+    appointmentId: 103,
+    medication: "Aspirin",
+    dosage: "300mg",
+    doctorNotes: "Take 1 tablet daily.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7304"),
+    patientName: "Aria Bell",
+    appointmentId: 104,
+    medication: "Vitamin D",
+    dosage: "1000 IU",
+    doctorNotes: "Take with food.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7305"),
+    patientName: "Caleb Brooks",
+    appointmentId: 105,
+    medication: "Antibiotics",
+    dosage: "500mg",
+    doctorNotes: "Take every 12 hours.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7306"),
+    patientName: "Scarlett Hayes",
+    appointmentId: 106,
+    medication: "Antihistamine",
+    dosage: "10mg",
+    doctorNotes: "Take before bed.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7307"),
+    patientName: "Nathan Foster",
+    appointmentId: 107,
+    medication: "Vitamin C",
+    dosage: "1000mg",
+    doctorNotes: "Take daily.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7308"),
+    patientName: "Victoria Barnes",
+    appointmentId: 108,
+    medication: "Ibuprofen",
+    dosage: "200mg",
+    doctorNotes: "Take every 8 hours.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7309"),
+    patientName: "Isaac Perry",
+    appointmentId: 109,
+    medication: "Paracetamol",
+    dosage: "500mg",
+    doctorNotes: "Take every 6 hours.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7310"),
+    patientName: "Penelope Russell",
+    appointmentId: 110,
+    medication: "Aspirin",
+    dosage: "300mg",
+    doctorNotes: "Take after meals.",
+    _class: "com.project.back_end.models.Prescription"
+  }
+]);
