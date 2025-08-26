@@ -44,7 +44,7 @@ public class Address {
     @NotBlank(message = "Region cannot exceed 50 characters")
     @Size(max = 50, message = "Region cannot exceed 50 characters")
     @Pattern(regexp = "^[a-zA-Z0-9 .,'-]+$", message = "Street can only contain letters, numbers, spaces, and . , ' -")
-    private String region;
+    private String city;
 
     @Column(nullable = false)
     @NotBlank(message = "Country cannot be blank")
@@ -56,12 +56,12 @@ public class Address {
     public Address() {}
 
     // Parametrized constructor
-    public Address(String street, String number, String interiorNumber, String postalCode, String region, String country) {
+    public Address(String street, String number, String interiorNumber, String postalCode, String city, String country) {
         this.street = street;
         this.number = number;
         this.interiorNumber = interiorNumber;
         this.postalCode = postalCode;
-        this.region = region;
+        this.city = city;
         this.country = country;
     }
 
@@ -96,11 +96,11 @@ public class Address {
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
-    public String getRegion() {
-        return region;
+    public String getCity() {
+        return city;
     }
-    public void setRegion(String region) {
-        this.region = region;
+    public void setCity(String city) {
+        this.city = city;
     }
     public String getCountry() {
         return country;
@@ -118,7 +118,7 @@ public class Address {
                 ", number='" + number + '\'' +
                 ", interiorNumber='" + interiorNumber + '\'' +
                 ", postalCode='" + postalCode + '\'' +
-                ", region='" + region + '\'' +
+                ", region='" + city + '\'' +
                 ", country='" + country + '\'' +
                 '}';
     }
