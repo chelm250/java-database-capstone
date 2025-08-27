@@ -1,0 +1,105 @@
+-- Status codes: 0 = Scheduled, 1 = Completed, 2 = Canceled
+
+INSERT INTO admin (name, last_name, username, email, password, role, address_id) VALUES
+('Christian', 'Vermeer', 'adminchris', 'admin.christian@example.com', 'secureAdminPass!', 'ADMIN', 1);
+
+INSERT INTO pharmacy (name, address_id) VALUES
+('HealthPlus Pharmacy', 41),
+('MediCare Drugs', 42),
+('Wellness Pharmacy', 43),
+('CareFirst Pharmacy', 44),
+('PharmaTrust', 45);
+
+-- Prescriptions sample data MongoDB
+db.prescriptions.insertMany([
+  {
+    _id: ObjectId("6807dd712725f013281e7301"),
+    patientName: "Noah Reed",
+    appointmentId: 101,
+    medication: "Paracetamol",
+    dosage: "500mg",
+    doctorNotes: "Take 1 tablet every 6 hours.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7302"),
+    patientName: "Harper Cole",
+    appointmentId: 102,
+    medication: "Ibuprofen",
+    dosage: "400mg",
+    doctorNotes: "Take after meals.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7303"),
+    patientName: "Logan Price",
+    appointmentId: 103,
+    medication: "Aspirin",
+    dosage: "300mg",
+    doctorNotes: "Take 1 tablet daily.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7304"),
+    patientName: "Aria Bell",
+    appointmentId: 104,
+    medication: "Vitamin D",
+    dosage: "1000 IU",
+    doctorNotes: "Take with food.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7305"),
+    patientName: "Caleb Brooks",
+    appointmentId: 105,
+    medication: "Antibiotics",
+    dosage: "500mg",
+    doctorNotes: "Take every 12 hours.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7306"),
+    patientName: "Scarlett Hayes",
+    appointmentId: 106,
+    medication: "Antihistamine",
+    dosage: "10mg",
+    doctorNotes: "Take before bed.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7307"),
+    patientName: "Nathan Foster",
+    appointmentId: 107,
+    medication: "Vitamin C",
+    dosage: "1000mg",
+    doctorNotes: "Take daily.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7308"),
+    patientName: "Victoria Barnes",
+    appointmentId: 108,
+    medication: "Ibuprofen",
+    dosage: "200mg",
+    doctorNotes: "Take every 8 hours.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7309"),
+    patientName: "Isaac Perry",
+    appointmentId: 109,
+    medication: "Paracetamol",
+    dosage: "500mg",
+    doctorNotes: "Take every 6 hours.",
+    _class: "com.project.back_end.models.Prescription"
+  },
+  {
+    _id: ObjectId("6807dd712725f013281e7310"),
+    patientName: "Penelope Russell",
+    appointmentId: 110,
+    medication: "Aspirin",
+    dosage: "300mg",
+    doctorNotes: "Take after meals.",
+    _class: "com.project.back_end.models.Prescription"
+  }
+]);
