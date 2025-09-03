@@ -1,3 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="icon" type="image/png" href="assets/images/logo/Logo.png">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/index.css">
+        <script src="../js/util.js" defer></script>
+        <script src="../js/render.js" defer></script>
+        <script src="../js/components/header.js" defer></script>
+        <script src="../js/components/footer.js" defer></script>
+    </head>
+    <script type="module" src="js/services/index.js" defer></script>
+    <body>
+        <main class="main-content">
+            <div class="container">
+                <div class="wrapper">
+                    <div id="header">
+                        <!-- Header will be rendered here -->
+                         <header class="header">
+                            <div class="logo">
+                                <img src="assets/images/logo/Logo.png" alt="Logo">
+                            </div>
+                            <nav>
+                                <a href="#home">Home</a>
+                                <a href="#about">About</a>
+                                <a href="#services">Services</a>
+                                <a href="#contact">Contact</a>
+                            </nav>
+                        </header>
+                    </div>
+                    <h2>Select Your Role</h2>
+                    <div class="role-buttons">
+                        <button id="adminBtn" onclick="selectRole('Admin')">Admin</button>
+                        <button id="doctorBtn" onclick="selectRole('Doctor')">Doctor</button>
+                        <button id="patientBtn" onclick="selectRole('Patient')">Patient</button>
+                    </div>
+                    <div id="modal" class="modal">
+                        <span class="close-button" id="closeModal">&times;</span>
+                        <div id="modal-body">
+                                <!-- Modal content will be injected here -->
+                        </div>
+                    </div>
+                    <div id="footer">
+                        <!-- Footer will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
 <!-- index.html -->
 <!-- 
 
