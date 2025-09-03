@@ -1,3 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" th:xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Admin Dashboard</title>
+        <link rel="icon" type="image/png" href="../assets/images/logo/logo.png">
+        <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+        <script th:src="@{/js/render.js}" defer></script>
+        <script th:src="@{/js/util.js}" defer></script>
+        <script th:src="@{/js/components/header.js}" defer></script>
+        <script th:src="@{/js/components/footer.js}" defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="wrapper">
+                <div id="header">
+                    <!-- Header will be rendered here -->
+                    <header class="header"></header>
+                </div>
+                <main class="main-content">
+                    <input type="text" id="searchBar" placeholder="Search by Doctor Name..."/>
+                    <div class="filters-section">
+                        <select id="filterTime" class="filter-dropdown">
+                            <option value="">Sort by Time</option>
+                            <option value="morning">Morning</option>
+                            <option value="afternoon">Afternoon</option>
+                            <option value="evening">Evening</option>
+                        </select>
+                        <select id="filterSpecialty" class="filter-dropdown">
+                            <option value="">Filter by Specialty</option>
+                            <option value="Cardiologist">Cardiologist</option>
+                            <option value="Dentist">Dentist</option>
+                            <option value="Dermatologist">Dermatologist</option>
+                            <option value="Neurologist">Neurologist</option>
+                            <option value="Pediatrician">Pediatrician</option>
+                            <option value="Psychiatrist">Psychiatrist</option>
+                            <option value="Radiologist">Radiologist</option>
+                            <option value="Surgeon">Surgeon</option>
+                            <option value="Urologist">Urologist</option>
+                        </select>
+                    </div>
+                    <div id="content" class="doctor-list"></div>
+                </main>
+                <div id="footer">
+                    <!-- Footer will be rendered here -->
+                    <footer class="footer"></footer>   
+                </div>
+            </div>
+        </div>
+        <div id="modal" class="modal">
+            <span id="closeModal" class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+        <script type="module" src="../js/services/adminDashboard.js" defer></script>
+        <script type="module" src="../js/components/doctorCard.js" defer></script>
+    </body>
+</html>
 <!-- adminDashboard.html -->
 
 <!-- 
