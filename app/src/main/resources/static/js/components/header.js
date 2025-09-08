@@ -1,29 +1,47 @@
+// Create the function to render the header on the HTML page
+// This function will check user role and session status to determine what to show in the header
 function renderHeader() {
-  const headerDiv = document.getElementById("header"); // Get the header div
 
-  // Start building the header content
+  // Create the header div (for the HTML file)
+  // Creates a const variable, with the name headerDiv
+  const headerDiv = document.getElementById("header"); // Set the header div Id so it can be injected into HTML
+
+  // Create a let variable to hold the header content. Use ""; to initialize it as an empty string
   let headerContent = "";
 
-  // If on the root page, clear session and render basic header
+  // If you are on the root page, clear localStorage and render a simple header
+  // (no user-specific elements, just logo and site title) on this case
   if (window.location.pathname.endsWith("/")) {
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("token");
+    localStorage.removeItem("userRole"); // Clear user role from localStorage
+    localStorage.removeItem("token"); // Clear token from localStorage
   }
 
-  // Get user role and token from localStorage
-  const role = localStorage.getItem("userRole");
-  const token = localStorage.getItem("token");
+  // Create variables and get user role and token from localStorage
+  // This will help determine what to show in the header depending on user role
+  const role = localStorage.getItem("userRole"); // Get user role from localStorage
+  const token = localStorage.getItem("token"); // Get token from localStorage
 
-  // Validate session
+  // Create validation to check if user is logged in and has a valid token
+  // If user has a role but no token, it means the session has expired or is invalid
+  // In this case, log the user out and redirect to homepage
   if ((role === "loggedPatient" || role === "admin" || role === "doctor") && !token) {
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("token");
-    alert("Session expired or invalid login. Please log in again.");
+    localStorage.removeItem("userRole"); // Clear user role from localStorage
+    localStorage.removeItem("token"); // Clear token from localStorage
+    alert("Session expired or invalid login. Please log in again."); // Alert user
     window.location.href = "/"; // Redirect to homepage
     return;
   }
 
-  if (role === 'admin') {
+  // Create the header content based on user role
+  // Here we build the header in HTML format and is stored in the headerContent variable
+  // The headerContent variable then will be injected into the headerDiv variable (which is the header div in HTML)
+  if (role === 'admin') { // Check if user role is admin
+    // If user is admin, show admin-specific buttons
+    // Use backticks `` to create a multi-line string in JavaScript
+    // Use single quotes '' inside the backticks to avoid conflicts
+    // Use an id for each button to attach event listeners later (defined actions in the attachHeaderButtonListeners function below)
+    // Use class for grouping itmes for styling purposes on CSS
+    // Add actions in case the the function attached to the button is not defined or not working
     headerContent = `
       <button id="adminBtn" class="menuBtn" onclick="window.location.href='adminDashboard.html'">Home</button>
       <button id="addDocBtn" class="menuBtn" onclick="openModal(\'addDoctor\')">Add Doctor</button>
@@ -54,15 +72,19 @@ function renderHeader() {
       `;
   }
 
-  // This injects header content into the header div
-  headerDiv.innerHTML = headerContent;
-  attachHeaderButtonListeners();
+  // Inject the headerContent variable into the headerDiv variable (which is the header div in HTML)
+  // This will render the header on the HTML page
+  headerDiv.innerHTML = headerContent; // Inject the header content into the header div
+  attachHeaderButtonListeners(); // Run the function to attach actions to the buttons, this function is defined below
 }
 
-// Logout function to clear session and redirect to homepage
+// Create a Logout function to clear localStorage and redirect to homepage
+// This function will be called when the user clicks the logout button, defined in the attachHeaderButtonListeners function below
 function logout() {
-  localStorage.removeItem("userRole");
-  localStorage.removeItem("token");
+  // Clear user session data from localStorage
+  localStorage.removeItem("userRole"); // Clear user role from localStorage
+  localStorage.removeItem("token"); // Clear token from localStorage
+  // Redirect to page depending on role
   if (role === 'loggedPatient') {
     window.location.href = "/pages/patientDashboard.html"; // Redirect to patient dashboard
     return;
@@ -72,14 +94,17 @@ function logout() {
   }
 }
 
-// Add event listeners to make buttons work with javascript
+// Creat the function to give actions to the buttons in the header
+// This function will add event listeners to the buttons in the header, so they can perform actions when clicked
+// The buttons are created dynamically based on user role, so we need to attach the event listeners after the header is rendered
+// Remember to use the correct Ids for the buttons, as defined in the renderHeader function above
 function attachHeaderButtonListeners() {
 
   // Admin Buttons
   // Admin Home Button
-  const adminBtn = document.getElementById("adminBtn");
-  if (adminBtn) {
-    adminBtn.addEventListener("click", () => window.location.href = 'adminDashboard.html');
+  const adminBtn = document.getElementById("adminBtn"); // Create a const variable to get the admin home button by its Id
+  if (adminBtn) { // If the admin button exists (user is admin), add an event listener to it
+    adminBtn.addEventListener("click", () => window.location.href = 'adminDashboard.html'); // When clicked, redirect to admin dashboard
   }
   // Add Doctor Button (Admin Role)
   const addDocBtn = document.getElementById("addDocBtn");
@@ -123,14 +148,16 @@ function attachHeaderButtonListeners() {
     patientAppointmentBtn.addEventListener("click", () => window.location.href = 'patientAppointments.html');
   }
 
-  // Logout Button
+  // Create an action for the logout button which call the logout function defined above
   const logoutBtn = document.getElementById("logout");
   if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => logout());
+    logoutBtn.addEventListener("click", () => logout()); // When clicked, call the logout function
   }
 }
 
-// Call the function to render the header when the file loads
+// Call the function to render the header when the HTML page loads
+// Remember to call the js file in the HTML file, so this function can be executed
+// This is called with the Id "header" defined in the const headerDiv variable above
 renderHeader();
 
 

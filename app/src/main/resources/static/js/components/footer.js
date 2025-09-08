@@ -1,7 +1,10 @@
+// JavaScript code to dynamically render the footer content on the webpage
 function renderFooter() {
+  // Create the footer element as a const variable and assign the id "footer", so it can be called in the HTML file
   const footer = document.getElementById("footer");
-  if (!footer) return;
+  if (!footer) return; // Exit if footer element is not found
 
+  // Create the HTML structure for the footer
   footer.innerHTML = `
     <footer class="footer">
       <div class="footer-logo">
@@ -35,7 +38,7 @@ function renderFooter() {
   `;
 }
 
-// Call the function when the file loads
+// Call the function, so it can be executed when the script loads
 renderFooter();
 
 

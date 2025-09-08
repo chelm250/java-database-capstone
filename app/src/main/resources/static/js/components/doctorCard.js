@@ -1,21 +1,24 @@
-export function createDoctorCard(doctor) {
-  // Main container for the doctor card
-  const card = document.createElement('div');
+
+// Create an export function to which will create a doctor card element dynamically based on the doctor data passed to it
+// This function will be imported and used in other scripts to display doctor information
+export function createDoctorCard(doctor) { // Use export to make it available outside this file, so it can be called from HTML file
+  const card = document.createElement('div'); // Create the main container, a div element for HTML
   card.className = 'doctor-card'; // Add a class to style with CSS
 
-  // Retrieve the current user role from localStorage
+  // Create a variable to get the user role from local storage
+  // This will determine what action are available on the card depending on role
   const userRole = localStorage.getItem('userRole');
 
-  // Doctor information container
+  // Create a div element to hold doctor information
   const infoDiv = document.createElement('div');
-  doctorInfo.className = 'doctor-info'; // class styling
+  doctorInfo.className = 'doctor-info'; // class styling in CSS
 
-  // Doctor's name
-  const name = document.createElement('h3');
-  name.textContent = doctor.name;
-  infoDiv.appendChild(name);
+  // Create and populate elements for doctor details
+  const name = document.createElement('h3'); // Doctor's name as a heading
+  name.textContent = doctor.name; // Set the text content to the doctor's name from the passed object
+  infoDiv.appendChild(name); // This makes the name appear on the infoDiv variable created above
 
-  // Doctor's specialization
+  // Create a paragraph for specialization and set its text content
   const specialization = document.createElement('p');
   specialization.textContent = `Specialization: ${doctor.specialization}`;
   infoDiv.appendChild(specialization);
@@ -27,55 +30,55 @@ export function createDoctorCard(doctor) {
 
   // Available times
   const times = document.createElement('p');
-  times.textContent = `Available Times: ${doctor.availableTimes.join(', ')}`;
+  times.textContent = `Available Times: ${doctor.availableTimes.join(', ')}`; // Join array into a string to display all available times, example format: "9:00 AM, 10:00 AM, 11:00 AM"
   infoDiv.appendChild(times);
 
-  // Action buttons container
+  // Create a div to hold the action buttons (like delete or book now), the buttons are create below based on role
   const actionsDiv = document.createElement('div');
   actionsDiv.className = 'card-actions'; // class styling
   
   // === ADMIN ROLE ACTIONS ===
 
-  // Admin Buttons
+  // If the user role is admin, will show the buttons created below
   if (userRole === 'admin') {
     // Remove Doctor Button
-    const removeBtn = document.createElement('button');
-    removeBtn.textContent = 'Delete';
-    removeBtn.className = 'deleteDoctorBtn'; // class styling
-    // Add action for the button
-    removeBtn.addEventListener('click', async () => {
-      // Confirm deletion
-      const confirmed = confirm(`Are you sure you want to delete Dr. ${doctor.name}?`);
-      if (!confirmed) return;
+    const removeBtn = document.createElement('button'); // Create a button element
+    removeBtn.textContent = 'Delete'; // Set the button text
+    removeBtn.className = 'deleteDoctorBtn'; // class styling CSS
+    // Create an an action (event listener) for the button when clicked
+    removeBtn.addEventListener('click', async () => { // Make it async since we will call an API
+      // Confirm if the admin really wants to delete
+      const confirmed = confirm(`Are you sure you want to delete Dr. ${doctor.name}?`); // Variable to confirm deletion
+      if (!confirmed) return; // If not true, exit the function
 
-      // Get token from local storage
+      // If confirmed, proceed to delete
+      // Get the admin token from local storage to authorize the delete request
       try {
         const token = localStorage.getItem('token');
-        if (!token) {
+        if (!token) { // If no token, alert and redirect to login
           alert('Session expired. Please log in again.');
           windows.location.href = "/";
           return;
         } 
 
         // Call API to delete
-        const response = await deleteDoctor(doctor.id, token);
+        const response = await deleteDoctor(doctor.id, token); // This will call the deleteDoctor function imported from doctorServices.js, passing the doctor ID and token
 
-        // On success: remove the card from the DOM
+        // If successful, remove the card from the UI and alert success
         if (response.success) {
           alert('Doctor deleted successfully.');
           card.remove();
-        } else {
+        } else { // If not successful, alert the error message
           alert(`Failed to delete doctor: ${response.message}`);
         }
-      } catch (error) {
+      } catch (error) { // Catch any errors during the process and log them
         console.error('Error deleting doctor:', error);
         alert('An error occurred while deleting the doctor. Please try again later.');
       }  
     });
 
-    // Add button to actions container
+    // Add button to actionDiv variable created above
     actionsDiv.appendChild(removeBtn);
-
 
   }
 
@@ -95,10 +98,10 @@ export function createDoctorCard(doctor) {
   else if (role === "loggedPatient") {
     const bookNow = document.createElement("button");
     bookNow.textContent = "Book Now";
-    bookNow.addEventListener("click", async (e) => {
+    bookNow.addEventListener("click", async (e) => { // The e represents info about the click event
       const token = localStorage.getItem("token");
       const patientData = await getPatientData(token);
-      showBookingOverlay(e, doctor, patientData);
+      showBookingOverlay(e, doctor, patientData); // This gives the info to the showBookingOverlay function imported from loggedPatient.js
     });
 
     // Add button to actions container
