@@ -10,6 +10,7 @@
         <script src="../js/render.js" defer></script>
         <script src="../js/components/header.js" defer></script>
         <script src="../js/components/footer.js" defer></script>
+        <script type="module" src="js/services/index.js" defer></script>
     </head>
     <body>
         <main class="main-content">
@@ -31,7 +32,7 @@
                 </div>
             </div>
         </main>
-        <!--Add the script so the page loads the indes.js -->
+        <!--Add the script so the page loads the indes.js, good practice to add it at end so all elements are loaded before loading this script-->
         <script type="module" src="js/services/index.js" defer></script>
     </body>
 </html>
