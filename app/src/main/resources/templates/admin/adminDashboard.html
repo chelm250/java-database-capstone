@@ -14,19 +14,17 @@
     <body>
         <div class="container">
             <div class="wrapper">
-                <div id="header">
-                    <header class="header"></header>
-                </div>
+                <div id="header" class="header"></div>
                 <main class="main-content">
                     <input type="text" id="searchBar" placeholder="Search by Doctor Name..."/>
                     <div class="filters-section">
-                        <select id="filterTime" class="filter-dropdown">
+                        <select id="timeFilter" class="filter-dropdown">
                             <option value="">Sort by Time</option>
                             <option value="morning">Morning</option>
                             <option value="afternoon">Afternoon</option>
                             <option value="evening">Evening</option>
                         </select>
-                        <select id="filterSpecialty" class="filter-dropdown">
+                        <select id="specialtyfilter" class="filter-dropdown">
                             <option value="">Filter by Specialty</option>
                             <option value="Cardiologist">Cardiologist</option>
                             <option value="Dentist">Dentist</option>
@@ -41,14 +39,12 @@
                     </div>
                     <div id="content" class="doctor-list"></div>
                 </main>
-                <div id="footer">
-                    <footer class="footer"></footer>   
-                </div>
+                <div id="footer" class="footer"> </div>
             </div>
         </div>
         <div id="modal" class="modal">
-            <span id="closeModal" class="close">&times;</span>
             <div id="modal-body"></div>
+            <span id="closeModal" class="close">&times;</span>
         </div>
         <script type="module" src="../js/services/adminDashboard.js" defer></script>
         <script type="module" src="../js/components/doctorCard.js" defer></script>
