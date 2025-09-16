@@ -7,12 +7,15 @@ function renderFooter() {
   // Create the HTML structure for the footer
   footer.innerHTML = `
     <footer class="footer">
-      <div class="footer-logo">
-        <img src="/assets/logo.png" alt="Site Logo" />
-        <p>© Copyright 2025 Capston. All rights reserved.</p>
-      </div>
-
       <div class="footer-columns">
+      
+        <div class="footer-logo-container">
+            <img src="assets/images/logo/logo.png" alt="Site Logo" class="footer-logo">
+            <div class="footer-info">
+                <p>© Copyright 2025 Capston. All rights reserved.</p>
+            </div>
+        </div>        
+
         <div class="footer-column">
           <h4>Company</h4>
           <a href="/about.html">About</a>
