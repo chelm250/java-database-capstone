@@ -23,6 +23,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long>{
 
    List<Doctor> findBySpecialtyIgnoreCase(String specialty);
 
+   List<String> findAvailableTimesByDoctorId(Long doctorId);
+
 
    // 1. Extend JpaRepository:
 //    - The repository extends JpaRepository<Doctor, Long>, which gives it basic CRUD functionality.
