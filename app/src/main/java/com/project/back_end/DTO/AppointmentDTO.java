@@ -1,5 +1,11 @@
 package com.project.back_end.DTO;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+import com.project.back_end.models.Appointment;
+
 public class AppointmentDTO {
 
     private Long id;
@@ -10,11 +16,11 @@ public class AppointmentDTO {
     private String patientEmail; // Simplified field for Patient Email
     private String patientPhone; // Simplified field for Patient Phone
     private String patientAddress; // Simplified field for Patient Address
-    private java.time.LocalDateTime appointmentTime;
+    private LocalDateTime appointmentTime;
     private int status; // Status as an integer (e.g., Scheduled:0, Completed:1)
-    private java.time.LocalDate appointmentDate; // Custom field for appointment date
-    private java.time.LocalTime appointmentTimeOnly; // Custom field for appointment time only
-    private java.time.LocalDateTime endTime; // Custom field for appointment end time
+    private LocalDate appointmentDate; // Custom field for appointment date
+    private LocalTime appointmentTimeOnly; // Custom field for appointment time only
+    private LocalDateTime endTime; // Custom field for appointment end time
 
     // Constructor
     public AppointmentDTO(Long id, Long doctorId, String doctorName, Long patientId, String patientName, String patientEmail,
@@ -33,6 +39,23 @@ public class AppointmentDTO {
         this.appointmentTimeOnly = appointmentTime.toLocalTime(); // Extract time part
         this.endTime = appointmentTime.plusHours(1); // Assuming 1 hour duration
     }
+
+    public AppointmentDTO(Appointment appointment) {
+        this (
+            appointment.getId(),
+            appointment.getDoctor().getId(),
+            appointment.getDoctor().getName(),
+            appointment.getPatient().getId(),
+            appointment.getPatient().getName(),
+            appointment.getPatient().getEmail(),
+            appointment.getPatient().getPhone(),
+            appointment.getPatient().getAddress() != null ? appointment.getPatient().getAddress().toString() : null,
+            appointment.getAppointmentTime(),
+            appointment.getAppointmentStatus() != null ? appointment.getAppointmentStatus().ordinal() : 0
+        );
+    }
+
+
 
     // Getters
     public Long getId() {
@@ -59,19 +82,19 @@ public class AppointmentDTO {
     public String getPatientAddress() {
         return patientAddress;
     }
-    public java.time.LocalDateTime getAppointmentTime() {
+    public LocalDateTime getAppointmentTime() {
         return appointmentTime;
     }
     public int getStatus() {
         return status;
     }
-    public java.time.LocalDate getAppointmentDate() {
+    public LocalDate getAppointmentDate() {
         return appointmentDate;
     }
-    public java.time.LocalTime getAppointmentTimeOnly() {
+    public LocalTime getAppointmentTimeOnly() {
         return appointmentTimeOnly;
     }
-    public java.time.LocalDateTime getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 

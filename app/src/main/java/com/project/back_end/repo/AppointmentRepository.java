@@ -1,5 +1,6 @@
 package com.project.back_end.repo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -52,7 +53,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
            "AND a.status = :status")
    public List<Appointment> filterByDoctorNameAndPatientIdAndStatus(@Param("doctorName") String doctorName, @Param("patientId") Long patientId, @Param("status") int status);
 
-   public List<String> findBookedTimesByDoctorIdAndDate(Long doctorId, java.time.LocalDate date);
+   public List<String> findBookedTimesByDoctorIdAndDate(Long doctorId, LocalDate date);
+
+   public List<Appointment> findByPatientIdAndStatus(Long id, int status);
+
+   public List<Appointment> findByAppointmentId(Long id);
    // 1. Extend JpaRepository:
 //    - The repository extends JpaRepository<Appointment, Long>, which gives it basic CRUD functionality.
 //    - The methods such as save, delete, update, and find are inherited without the need for explicit implementation.

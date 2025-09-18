@@ -1,6 +1,64 @@
 package com.project.back_end.services;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.project.back_end.models.Prescription;
+import com.project.back_end.repo.PrescriptionRepository;
+
+@Service
 public class PrescriptionService {
+
+    @Autowired
+    private PrescriptionRepository prescriptionRepository;
+
+    public ResponseEntity<Map<String, String>> savePrescription(Prescription prescription) {
+        try {
+            // Check if a prescription already exists for the given appointment
+            Long appointmentId = prescription.getAppointmentId();
+            if (prescriptionRepository.findByAppointmentId(appointmentId) != null) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Prescription already exists for this appointment.");
+                return ResponseEntity.status(400).body(response);
+            }
+
+            // Save the new prescription
+            prescriptionRepository.save(prescription);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Prescription saved successfully.");
+            return ResponseEntity.status(201).body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "An error occurred while saving the prescription.");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
+    public ResponseEntity<Map<String, Object>> getPrescription(Long id) {
+        try {
+            if (id == null) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", "Appointment ID is required.");
+                return ResponseEntity.status(400).body(response);
+            }
+            Prescription prescription = prescriptionRepository.findByAppointmentId(id).stream().findFirst().orElse(null);
+            Map<String, Object> response = new HashMap<>();
+            response.put("prescription", prescription);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "An error occurred while fetching the prescription.");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
+    
     
  // 1. **Add @Service Annotation**:
 //    - The `@Service` annotation marks this class as a Spring service component, allowing Spring's container to manage it.
