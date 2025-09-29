@@ -1,6 +1,147 @@
 package com.project.back_end.services;
 
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.security.Keys;
+
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import com.project.back_end.repo.AdminRepository;
+import com.project.back_end.repo.DoctorRepository;
+import com.project.back_end.repo.PatientRepository;
+
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+
+
+
+@Component 
 public class TokenService {
+
+    private final AdminRepository adminRepository;
+    private final DoctorRepository doctorRepository;
+    private final PatientRepository patientRepository;
+
+    @Value("${jwt.secret}")
+    private String secret;
+
+    
+    public TokenService(AdminRepository adminRepository,
+                        DoctorRepository doctorRepository,
+                        PatientRepository patientRepository) {
+        this.adminRepository = adminRepository;
+        this.doctorRepository = doctorRepository;
+        this.patientRepository = patientRepository;
+    }
+
+    
+    public String generateToken(String identifier) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + 604800000L); // 7 days
+
+        return Jwts.builder()
+                .setSubject(identifier) // Set identifier as subject
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(getSigningKey())
+                .compact();
+    }
+
+   
+    public String extractIdentifier(String token) {
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(getSigningKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            return claims.getSubject(); // Return username or email as identifier
+        } catch (JwtException e) {
+            return null; // Invalid token
+        }
+    }
+
+    
+    public boolean validateToken(String token, String role) {
+        try {
+            String identifier = extractIdentifier(token);
+            if (identifier == null) {
+                return false; // Invalid token
+            }
+
+            switch (role.toLowerCase()) {
+                case "admin":
+                    return adminRepository.findByUsername(identifier) != null;
+                case "doctor":
+                    return doctorRepository.findByEmail(identifier) != null;
+                case "patient":
+                    return patientRepository.findByEmail(identifier) != null;
+                default:
+                    return false; // Unknown role
+            }
+        } catch (Exception e) {
+            return false; // Handle any errors gracefully
+        }
+    }
+
+    private SecretKey getSigningKey() {
+        byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public Long extractPatientId (String token) {
+        try {
+            String email = extractIdentifier(token);
+            if (email == null) {
+                return null; // Invalid token
+            }
+            var patient = patientRepository.findByEmail(email);
+            return (patient != null) ? patient.getId() : null;
+        } catch (Exception e) {
+            return null; // Handle any errors gracefully
+        }
+    }
+
+    public String extractEmail(String token) {
+        String identifier = extractIdentifier(token);
+        return identifier;
+    }
+    
+    public Long getUserIdFromToken(String token) {
+        try {
+            String identifier = extractIdentifier(token);
+            if (identifier == null) {
+                return null; // Invalid token
+            }
+            var patient = patientRepository.findByEmail(identifier);
+            if (patient != null) {
+                return patient.getId();
+            }
+            var doctor = doctorRepository.findByEmail(identifier);
+            if (doctor != null) {
+                return doctor.getId();
+            }
+            var admin = adminRepository.findByUsername(identifier);
+            if (admin != null) {
+                return admin.getId();
+            }
+            return null; // User not found
+        } catch (Exception e) {
+            return null; // Handle any errors gracefully
+        }
+    }
+
+
+
+
+
+
 // 1. **@Component Annotation**
 // The @Component annotation marks this class as a Spring component, meaning Spring will manage it as a bean within its application context.
 // This allows the class to be injected into other Spring-managed components (like services or controllers) where it's needed.
@@ -38,6 +179,4 @@ public class TokenService {
 // - If the role or user does not exist, it returns false, indicating the token is invalid.
 // - The method gracefully handles any errors by returning false if the token is invalid or an exception occurs.
 // This ensures secure access control based on the user's role and their existence in the system.
-
-
 }

@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -33,6 +32,8 @@ public class AppointmentService {
     private DoctorRepository doctorRepository;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private Service service;
 
 
     // Methods for booking, updating, canceling, and retrieving appointments would go here.
@@ -60,7 +61,7 @@ public class AppointmentService {
         }
 
         // Step 2: Validate the appointment
-        if (service.validateAppointment(appointment)) {
+        if (appointment.getAppointmentTime() == null || appointment.getAppointmentTime().isBefore(LocalDateTime.now())) {
             response.put("message", "Invalid appointment data.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }

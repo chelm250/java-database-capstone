@@ -89,7 +89,7 @@ public class DoctorService {
                 response.put("message", "Invalid password.");
                 return ResponseEntity.status(401).body(response);
             }
-            String token = tokenService.generateToken(doctor.getId(), "doctor");
+            String token = tokenService.generateToken(String.valueOf(doctor.getId()));
             response.put("token", token);
             response.put("message", "Login successful.");
             return ResponseEntity.ok(response);
@@ -164,6 +164,40 @@ public class DoctorService {
         List<Doctor> doctors = doctorRepository.findAll();
         List<Doctor> filteredDoctors = filterDoctorByTime(doctors, amOrPm);
         response.put("doctors", filteredDoctors);
+        return response;
+    }
+
+    public Map<String, Object> filterDoctorsByName(String name) {
+        Map<String, Object> response = new HashMap<>();
+        List<Doctor> doctors = doctorRepository.findByNameLike(name);
+        response.put("doctors", doctors);
+        return response;
+    }
+
+    public Map<String, Object> filterDoctorsBySpecialty(String specialty) {
+        Map<String, Object> response = new HashMap<>();
+        List<Doctor> doctors = doctorRepository.findBySpecialtyIgnoreCase(specialty);
+        response.put("doctors", doctors);
+        return response;
+    }
+
+    public Map<String, Object> getAllDoctors() {
+        Map<String, Object> response = new HashMap<>();
+        List<Doctor> doctors = doctorRepository.findAll();
+        response.put("doctors", doctors);
+        return response;
+    }
+
+    public Map<String, Object> filterDoctorsByIdAndDate (Long doctorId, LocalDate date) {
+        Map<String, Object> response = new HashMap<>();
+        Doctor doctor = doctorRepository.findById(doctorId).orElse(null);
+        if (doctor == null) {
+            response.put("message", "Doctor not found.");
+            return response;
+        }
+        List<String> availableTimes = getDoctorAvailability(doctorId, date);
+        response.put("doctor", doctor);
+        response.put("availableTimes", availableTimes);
         return response;
     }
     

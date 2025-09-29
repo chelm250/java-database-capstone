@@ -3,10 +3,8 @@ package com.project.back_end.services;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,8 @@ public class PatientService {
     private PatientRepository patientRepository;
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+    private TokenService tokenService;
 
 
     public int createPatient(Patient patient) {
@@ -41,7 +41,7 @@ public class PatientService {
 
         try {
             // Validate token and extract patient email
-            Long patientId = tokenService.extractPatientId(token);
+            Long patientId = id;
             if (patientId == null || !patientId.equals(id)) {
                 response.put("message", "Invalid token or patient ID.");
                 return ResponseEntity.status(401).body(response);
@@ -96,6 +96,13 @@ public class PatientService {
         }
     }
 
+    public ResponseEntity<Map<String, Object>> filterByCondition(String condition) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Patient ID is required.");
+        return ResponseEntity.badRequest().body(response);
+    }
+
+
     public ResponseEntity<Map<String, Object>> filterByDoctor(String doctorName, Long id) {
         Map<String, Object> response = new HashMap<>();
         try {
@@ -118,36 +125,12 @@ public class PatientService {
         }
     }
 
-    public ResponseEntity<Map<String, Object>> filterByDoctorAndCondition(String doctorName, String condition, Long id) {
+    public ResponseEntity<Map<String, Object>> filterByDoctorAndCondition (String doctorName, String condition) {
         Map<String, Object> response = new HashMap<>();
-        try {
-            if (!patientRepository.existsById(id)) {
-                response.put("message", "Patient not found.");
-                return ResponseEntity.status(404).body(response);
-            }
-            List<Appointment> appointments;
-            if ("future".equalsIgnoreCase(condition)) {
-                appointments = appointmentRepository.filterByDoctorNameAndPatientIdAndStatus(doctorName, id, 0); // Future appointments
-            } else if ("past".equalsIgnoreCase(condition)) {
-                appointments = appointmentRepository.filterByDoctorNameAndPatientIdAndStatus(doctorName, id, 1); // Past appointments
-            } else {
-                response.put("message", "Invalid condition. Use 'past' or 'future'.");
-                return ResponseEntity.badRequest().body(response);
-            }
-
-            List<AppointmentDTO> appointmentDTOs = appointments.stream()
-                .map(AppointmentDTO::new)
-                .collect(Collectors.toList());
-
-            response.put("appointments", appointmentDTOs);
-            return ResponseEntity.ok(response);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.put("message", "Error filtering appointments by doctor and condition.");
-            return ResponseEntity.status(500).body(response);
-        }
+        response.put("message", "Patient ID is required.");
+        return ResponseEntity.badRequest().body(response);
     }
+    
 
     public ResponseEntity<Map<String, Object>> getPatientDetails(String token) {
         Map<String, Object> response = new HashMap<>();
