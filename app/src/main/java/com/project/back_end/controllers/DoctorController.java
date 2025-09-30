@@ -1,7 +1,124 @@
 package com.project.back_end.controllers;
 
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.project.back_end.models.Doctor;
+import com.project.back_end.services.DoctorService;
+import com.project.back_end.services.TokenService;
+
+@RequestMapping
 public class DoctorController {
+
+    @Autowired
+    private DoctorService doctorService;
+    @Autowired
+    private TokenService tokenService;
+
+    @GetMapping("/availability/{user}/{doctorId}/{date}/{token}")
+    public ResponseEntity<Map<String, Object>> getDoctorAvailability(String user, Long doctorId, String date, String token) {
+        // Validate the token
+        if (!tokenService.validateToken(token, user)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid token"));
+        }
+
+        // Get doctor's availability
+        LocalDate localDate = LocalDate.parse(date);
+        List<String> availabilityList = doctorService.getDoctorAvailability(doctorId, localDate);
+        Map<String, Object> availability = Map.of("availability", availabilityList);
+        return ResponseEntity.ok(availability);
+    }
+
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> getAllDoctors() {
+        List<Doctor> doctors = doctorService.getDoctors(); // Fetch from service
+        Map<String, Object> response = new HashMap<>();
+        response.put("doctors", doctors);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/register/{token}")
+    public ResponseEntity<Map<String, String>> saveDoctor(Doctor doctor, String token) {
+        try {
+            // Validate the token for admin role
+            if (!tokenService.validateToken(token, "admin")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Some in"));
+            }
+
+            // Check if the doctor already exists
+            String doctorName = doctor.getName();
+            if (doctorService.getDoctorByName(doctorName) != null) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message", "Doctor already exists"));
+            }
+
+            // Save the new doctor
+            doctorService.saveDoctor(doctor);
+            return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Doctor saved to the database"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Some internal error ocurred " + e.getMessage()));
+        }
+    }
+
+    @PutMapping("/update/{token}")
+    public ResponseEntity<Map<String, String>> updateDoctor(Doctor doctor, String token) {
+        try {
+            // Validate the token for admin role
+            if (!tokenService.validateToken(token, "admin")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Some invalid token"));
+            }
+            // Check if the doctor exists
+            String doctorName = doctor.getName();
+            if (doctorService.getDoctorByName(doctorName) == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Doctor not found"));
+            }
+            // Update the doctor
+            doctorService.updateDoctor(doctor);
+            return ResponseEntity.ok(Map.of("message", "Doctor updated successfully"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Some internal error occurred: " + e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/delete/{id}/{token}")
+    public ResponseEntity<Map<String, String>> deleteDoctor(Long id, String token) {
+        try {
+            // Validate the token for admin role
+            if (!tokenService.validateToken(token, "admin")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Some invalid token"));
+            }
+            // Check if the doctor exists
+            if (doctorService.getDoctorById(id) == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Doctor not found"));
+            }
+            // Delete the doctor
+            doctorService.deleteDoctor(id);
+            return ResponseEntity.ok(Map.of("message", "Doctor deleted successfully"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Some internal error occurred: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/filter/{name}/{time}/{speciality}")
+    public ResponseEntity<Map<String, Object>> filter(String name, String time, String speciality) {
+        Map<String, Object> filterResult = doctorService.filterDoctorsByNameSpecilityandTime(name, speciality, time);
+        Map<String, Object> response = new HashMap<>();
+        response.put("doctors", filterResult.get("doctors"));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+
 
 // 1. Set Up the Controller Class:
 //    - Annotate the class with `@RestController` to define it as a REST controller that serves JSON responses.

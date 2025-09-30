@@ -1,7 +1,49 @@
 
 package com.project.back_end.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.project.back_end.models.Admin;
+import com.project.back_end.services.Service;
+import com.project.back_end.services.TokenService;
+
+
+@RestController
+@RequestMapping("${api.path}admin")
 public class AdminController {
+
+
+    @Autowired
+    private Service service;
+    @Autowired
+    private TokenService tokenService;
+    
+
+
+    @PostMapping("/adminLogin")
+    public ResponseEntity<Map<String, String>> adminLogin(@RequestBody Admin admin) {
+        Map<String, String> response = new HashMap<>();
+        ResponseEntity<Map<String, String>> validationResponse = service.validateAdmin(admin);
+        if (validationResponse.getStatusCode().is2xxSuccessful()) {
+            String token = tokenService.generateToken(String.valueOf(admin.getId()));
+            response.put("status", "success");
+            response.put("token", token);
+            return ResponseEntity.ok(response);
+        } else {
+            response.put("status", "error");
+            response.put("message", "Invalid credentials");
+            return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).body(response);
+        }
+    }
+
 
 // 1. Set Up the Controller Class:
 //    - Annotate the class with `@RestController` to indicate that it's a REST controller, used to handle web requests and return JSON responses.

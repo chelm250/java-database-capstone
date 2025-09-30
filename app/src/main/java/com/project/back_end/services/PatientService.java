@@ -158,10 +158,81 @@ public class PatientService {
         }
     }
 
+    public Long getPatientById(Long id) {
+        return patientRepository.findById(id).orElse(null).getId();
+    }
 
+    public boolean checkPatientExists(String email) {
+        try {
+            if (email == null || email.isEmpty()) {
+                return false;
+            }
+            boolean exists = patientRepository.findByEmail(email) != null;
+            return exists;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    public ResponseEntity<Map<String, Object>> filterPatient(String token, String condition, String name) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            // Validate token and extract patient email
+            String email = tokenService.extractEmail(token);
+            if (email == null) {
+                response.put("message", "Invalid token.");
+                return ResponseEntity.status(401).body(response);
+            }
 
-    
+            Patient patient = patientRepository.findByEmail(email);
+            if (patient == null) {
+                response.put("message", "Patient not found.");
+                return ResponseEntity.status(404).body(response);
+            }
+
+            Long patientId = patient.getId();
+            List<Appointment> appointments;
+
+            if ((condition == null || condition.isEmpty()) && (name != null && !name.isEmpty())) {
+                // Filter by doctor name only
+                appointments = appointmentRepository.filterByDoctorNameAndPatientId(name, patientId);
+            } else if ((name == null || name.isEmpty()) && (condition != null && !condition.isEmpty())) {
+                // Filter by condition only
+                if ("future".equalsIgnoreCase(condition)) {
+                    appointments = appointmentRepository.findByPatientIdAndStatus(patientId, 0); // Future appointments
+                } else if ("past".equalsIgnoreCase(condition)) {
+                    appointments = appointmentRepository.findByPatientIdAndStatus(patientId, 1); // Past appointments
+                } else {
+                    response.put("message", "Invalid condition. Use 'past' or 'future'.");
+                    return ResponseEntity.badRequest().body(response);
+                }
+            } else if ((condition != null && !condition.isEmpty()) && (name != null && !name.isEmpty())) {
+                // Filter by both doctor name and condition
+                if ("future".equalsIgnoreCase(condition)) {
+                    appointments = appointmentRepository.filterByDoctorNameAndPatientIdAndStatus(name, patientId, 0); // Future appointments
+                } else if ("past".equalsIgnoreCase(condition)) {
+                    appointments = appointmentRepository.filterByDoctorNameAndPatientIdAndStatus(name, patientId, 1); // Past appointments
+                } else {
+                    response.put("message", "Invalid condition. Use 'past' or 'future'.");
+                    return ResponseEntity.badRequest().body(response);
+                }
+            } else {
+                response.put("message", "At least one filter (condition or doctor name) must be provided.");
+                return ResponseEntity.badRequest().body(response);
+            }
+            List<AppointmentDTO> appointmentDTOs = appointments.stream()
+                .map(AppointmentDTO::new)
+                .collect(Collectors.toList());
+            response.put("appointments", appointmentDTOs);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.put("message", "Error filtering appointments: " + e.getMessage());
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
 
 
 

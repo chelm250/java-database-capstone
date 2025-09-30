@@ -25,6 +25,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long>{
 
    List<String> findAvailableTimesByDoctorId(Long doctorId);
 
+   List<Doctor> findByName(String name);
+
 
    // 1. Extend JpaRepository:
 //    - The repository extends JpaRepository<Doctor, Long>, which gives it basic CRUD functionality.

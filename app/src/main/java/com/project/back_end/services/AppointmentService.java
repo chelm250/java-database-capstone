@@ -114,7 +114,7 @@ public class AppointmentService {
         }
     }
 
-    public Map<String, Object> getAppointment(String pname, LocalDate date, String token) {
+    public Map<String, Object> getAppointment(String name, LocalDate date, String token) {
         Map<String, Object> response = new HashMap<>();
 
         try {
@@ -130,9 +130,9 @@ public class AppointmentService {
                 .findByDoctorIdAndAppointmentTimeBetween(doctorId, start, end);
 
             // Step 4: Filter by patient name if provided
-            if (pname != null && !pname.trim().isEmpty()) {
+            if (name != null && !name.trim().isEmpty()) {
                 appointments = appointments.stream()
-                    .filter(a -> a.getPatient().getName().contains(pname))
+                    .filter(a -> a.getPatient().getName().contains(name))
                     .collect(Collectors.toList());
             }
 
@@ -146,7 +146,6 @@ public class AppointmentService {
 
         return response;
     }
-    
 
 
 

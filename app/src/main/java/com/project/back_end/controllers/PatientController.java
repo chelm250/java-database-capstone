@@ -1,6 +1,104 @@
 package com.project.back_end.controllers;
 
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.project.back_end.DTO.Login;
+import com.project.back_end.models.Patient;
+import com.project.back_end.services.PatientService;
+import com.project.back_end.services.Service;
+import com.project.back_end.services.TokenService;
+
+
+@RestController
 public class PatientController {
+
+    @Autowired
+    private PatientService patientService;
+    @Autowired
+    private TokenService tokenService;
+    @Autowired
+    private Service service;
+
+
+    @GetMapping("/patient")
+    public ResponseEntity<Map<String, Object>> getPatient(String token) {
+        // Validate the token for patient role
+        if (!tokenService.validateToken(token, "patient")) {
+            return ResponseEntity.status(401).body(Map.of("message", "Invalid token"));
+        }
+        // Fetch patient details
+        return patientService.getPatientDetails(token);
+    }
+
+    @PostMapping("/patient/register")
+    public ResponseEntity<Map<String, String>> createPatient(Patient patient) {
+        // Check if patient already exists
+        String email = patient.getEmail();
+        if (patientService.checkPatientExists(email)) {
+            return ResponseEntity.status(400).body(Map.of("message", "Patient already exists"));
+        }
+        // Create new patient
+        int result = patientService.createPatient(patient);
+        if (result == 1) {
+            return ResponseEntity.ok(Map.of("message", "Patient created successfully"));
+        } else {
+            return ResponseEntity.status(500).body(Map.of("message", "Error creating patient"));
+        }
+    }
+
+    @PostMapping("/patient/login")
+    public ResponseEntity<Map<String, Object>> validateLogin(Login login) {
+        try {
+            if (service.validatePatientLogin(login) == null) {
+                return ResponseEntity.status(401).body(Map.of("message", "Invalid email/username or password"));
+            }
+            return ResponseEntity.status(200).body(Map.of("message", "Login successful", "token", service.validatePatientLogin(login)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("message", "Error during login: " + e.getMessage()));
+        }
+
+    }
+
+    @GetMapping("/patient/{id}/{token}")
+    public ResponseEntity<Map<String, Object>> getPatientAppointment(Long id, String token) {
+        // Validate the token for patient role
+        if (!tokenService.validateToken(token, "patient")) {
+            return ResponseEntity.status(401).body(Map.of("message", "Invalid token"));
+        }
+        // Fetch patient appointments
+        return patientService.getPatientAppointment(id, token);
+    }
+
+    @GetMapping("/patient/filter/{condition}/{name}/{token}")
+    public ResponseEntity<Map<String, Object>> filterPatientAppointment(String condition, String name, String token) {
+        // Validate the token for patient role
+        if (!tokenService.validateToken(token, "patient")) {
+            return ResponseEntity.status(401).body(Map.of("message", "Invalid token"));
+        }
+        // Filter patient appointments based on condition and name
+        return ResponseEntity.ok(service.filterPatient(token, condition, name));
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 1. Set Up the Controller Class:
 //    - Annotate the class with `@RestController` to define it as a REST API controller for patient-related operations.

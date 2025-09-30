@@ -201,6 +201,15 @@ public class DoctorService {
         return response;
     }
     
+    public String getDoctorByName(String name) {
+        List<Doctor> doctors = doctorRepository.findByName(name);
+        return (doctors != null && !doctors.isEmpty()) ? doctors.get(0).getName() : null;
+    }
+
+    public Long getDoctorById(Long id) {
+        Doctor doctor = doctorRepository.findById(id).orElse(null);
+        return (doctor != null) ? doctor.getId() : null;
+    }
 
 
 
