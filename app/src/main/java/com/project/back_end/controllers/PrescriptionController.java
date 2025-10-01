@@ -1,7 +1,60 @@
 package com.project.back_end.controllers;
 
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.project.back_end.models.Prescription;
+import com.project.back_end.services.PrescriptionService;
+import com.project.back_end.services.Service;
+import com.project.back_end.services.TokenService;
+
+
+@RestController
+@RequestMapping("${api.path}prescription")
 public class PrescriptionController {
     
+    @Autowired
+    private PrescriptionService prescriptionService;
+    @Autowired
+    private Service service;
+    @Autowired
+    private TokenService tokenService;
+
+
+    @PostMapping("/save/{token}")
+    public ResponseEntity<Map<String, Object>> savePrescription(Prescription prescription, String token) {
+        // Validate the token for doctor role
+        if (!tokenService.validateToken(token, "doctor")) {
+            return ResponseEntity.status(401).body(Map.of("message", "Invalid token"));
+        }
+        // Save the prescription
+        prescriptionService.savePrescription(prescription);
+        return ResponseEntity.ok(Map.of("message", "Prescription saved successfully"));
+    }
+
+    @GetMapping("/get/{appointmentId}/{token}")
+    public ResponseEntity<Map<String, Object>> getPrescription(Long appointmentId, String token) {
+        // Validate the token for doctor role
+        if (!tokenService.validateToken(token, "doctor")) {
+            return ResponseEntity.status(401).body(Map.of("message", "Invalid token"));
+        }
+        // Fetch prescription details
+        ResponseEntity<Map<String, Object>> response = prescriptionService.getPrescriptionByAppointmentId(appointmentId);
+        if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null && response.getBody().containsKey("prescription")) {
+            return ResponseEntity.ok(Map.of("prescription", response.getBody().get("prescription")));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("message", "Prescription not found"));
+        }
+    }
+    
+    
+
 // 1. Set Up the Controller Class:
 //    - Annotate the class with `@RestController` to define it as a REST API controller.
 //    - Use `@RequestMapping("${api.path}prescription")` to set the base path for all prescription-related endpoints.

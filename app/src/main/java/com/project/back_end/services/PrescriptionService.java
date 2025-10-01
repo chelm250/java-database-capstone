@@ -58,6 +58,20 @@ public class PrescriptionService {
         }
     }
 
+    public ResponseEntity<Map<String, Object>> getPrescriptionByAppointmentId(Long appointmentId) {
+        try {
+            Prescription prescription = prescriptionRepository.findByAppointmentId(appointmentId).stream().findFirst().orElse(null);
+            Map<String, Object> response = new HashMap<>();
+            response.put("prescription", prescription);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "An error occurred while fetching the prescription.");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
     
     
  // 1. **Add @Service Annotation**:

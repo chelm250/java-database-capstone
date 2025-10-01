@@ -28,7 +28,6 @@ import org.apache.catalina.connector.Response;
 public class Service {
 
     private final TokenService tokenService;
-    private final AdminRepository adminRepository;
     private final DoctorRepository doctorRepository;
     private final PatientRepository patientRepository;
     private final DoctorService doctorService;

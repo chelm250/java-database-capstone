@@ -147,6 +147,26 @@ public class AppointmentService {
         return response;
     }
 
+    public Map<String, Object> getAppointmentById(Long id) {
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            Optional<Appointment> appointment = appointmentRepository.findById(id);
+            if (appointment.isPresent()) {
+                response.put("appointment", appointment.get());
+                response.put("message", "Appointment retrieved successfully");
+            } else {
+                response.put("appointment", null);
+                response.put("message", "Appointment not found");
+            }
+        } catch (Exception e) {
+            response.put("appointment", null);
+            response.put("message", "Error retrieving appointment: " + e.getMessage());
+        }
+
+        return response;
+    }
+
 
 
 

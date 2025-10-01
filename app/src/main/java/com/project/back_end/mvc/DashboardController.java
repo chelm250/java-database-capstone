@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.project.back_end.services.TokenService;
+
 
 @Controller
 public class DashboardController {
@@ -14,9 +16,9 @@ public class DashboardController {
 
     @GetMapping("/adminDashboard/{token}") // Map GET requests to /adminDashboard/{token}
     public String adminDashboard(@PathVariable String token) { // Gets token from the URL path
-        var response = service.validateToken(token, "admin"); // Validate token for admin role, redirect if invalid
+        boolean isValid = service.validateToken(token, "admin"); // Validate token for admin role, redirect if invalid
 
-        if (response.get("error") == null) { // if no error, token is valid. This will be resolved in the service class
+        if (isValid) { // if valid, token is valid. This will be resolved in the service class
             return "admin/adminDashboard";
         } else {
             return "redirect:/";
@@ -25,9 +27,9 @@ public class DashboardController {
 
     @GetMapping("/doctorDashboard/{token}")
     public String doctorDashboard(@PathVariable String token) {
-        var response = service.validateToken(token, "doctor");
+        boolean isValid = service.validateToken(token, "doctor");
 
-        if (response.get("error") == null) {
+        if (isValid) {
             return "doctor/doctorDashboard";
         } else {
             return "redirect:/";
