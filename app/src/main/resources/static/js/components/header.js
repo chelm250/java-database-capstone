@@ -102,9 +102,9 @@ function attachHeaderButtonListeners() {
 
   // Admin Buttons
   // Admin Home Button
-  const adminBtn = document.getElementById("adminBtn"); // Create a const variable to get the admin home button by its Id
-  if (adminBtn) { // If the admin button exists (user is admin), add an event listener to it
-    adminBtn.addEventListener("click", () => window.location.href = 'adminDashboard.html'); // When clicked, redirect to admin dashboard
+  const adminLoginBtn = document.getElementById("adminLoginBtn"); // Create a const variable to get the admin home button by its Id
+  if (adminLoginBtn) { // If the admin button exists (user is admin), add an event listener to it
+    adminLoginBtn.addEventListener("click", () => window.location.href = 'adminDashboard.html'); // When clicked, redirect to admin dashboard
   }
   // Add Doctor Button (Admin Role)
   const addDocBtn = document.getElementById("addDocBtn");
