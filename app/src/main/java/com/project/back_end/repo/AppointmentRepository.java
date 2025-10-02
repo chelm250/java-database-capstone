@@ -3,6 +3,7 @@ package com.project.back_end.repo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -57,7 +58,16 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
    public List<Appointment> findByPatientIdAndStatus(Long id, int status);
 
-   public List<Appointment> findByAppointmentId(Long id);
+   public Optional<Appointment> findById(Long id);
+
+
+
+
+
+
+
+
+   
    // 1. Extend JpaRepository:
 //    - The repository extends JpaRepository<Appointment, Long>, which gives it basic CRUD functionality.
 //    - The methods such as save, delete, update, and find are inherited without the need for explicit implementation.
