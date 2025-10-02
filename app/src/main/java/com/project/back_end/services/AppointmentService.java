@@ -33,7 +33,7 @@ public class AppointmentService {
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private Service service;
+    private ClinicService clinicService;
 
 
     // Methods for booking, updating, canceling, and retrieving appointments would go here.
