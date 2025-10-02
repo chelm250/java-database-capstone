@@ -8,13 +8,13 @@ const DOCTOR_API = API_BASE_URL + '/doctor/login'; // Define a variable with the
 // Create a window.onload function to give an action to the buttons created in index.html
 // window.onload ensures the DOM is fully loaded before we try to access elements. This means the code inside will run only after the page is ready.
 window.onload = function() {
-  const adminBtn = document.getElementById('adminBtn'); // Create a variable to select the admin login button using its Id in index.html
+  const adminBtn = document.getElementById('adminLoginBtn'); // Create a variable to select the admin login button using its Id in index.html
   if (adminBtn) { // If the button exists on the page then add an event listener(action) to it
     adminBtn.addEventListener('click', () => openModal('adminLogin')) // If the button is clicked, call the openModal function with 'adminLogin' to show the admin login modal
   };
 
   // Repeat the same process for the doctor login button
-  const doctorBtn = document.getElementById('doctorBtn');
+  const doctorBtn = document.getElementById('doctorLoginBtn');
   if (doctorBtn) {
     doctorBtn.addEventListener('click', () => openModal('doctorLogin'))
   }
