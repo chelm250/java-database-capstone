@@ -43,7 +43,7 @@ function renderHeader() {
     // Use class for grouping itmes for styling purposes on CSS
     // Add actions in case the the function attached to the button is not defined or not working
     headerContent = `
-      <button id="adminBtn" class="menuBtn" onclick="window.location.href='adminDashboard.html'">Home</button>
+      <button id="adminLoginBtn" class="menuBtn" onclick="window.location.href='adminDashboard.html'">Home</button>
       <button id="addDocBtn" class="menuBtn" onclick="openModal(\'addDoctor\')">Add Doctor</button>
       <a id="logout" href="#" onclick="logout()">Logout</a>
     `;

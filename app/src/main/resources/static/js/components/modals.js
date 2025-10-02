@@ -1,4 +1,4 @@
-// modals.js
+// mod ls.js
 export function openModal(type) {
   let modalContent = '';
   if (type === 'addDoctor') {
@@ -76,7 +76,7 @@ export function openModal(type) {
   document.getElementById('modal').style.display = 'block';
 
   document.getElementById('closeModal').onclick = () => {
-    document.getElementById('modal').style.display = 'none';
+  document.getElementById('modal').style.display = 'none';
   };
 
   if (type === "patientSignup") {
