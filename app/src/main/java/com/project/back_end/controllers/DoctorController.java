@@ -27,7 +27,7 @@ public class DoctorController {
     private TokenService tokenService;
 
     @GetMapping("/availability/{user}/{doctorId}/{date}/{token}")
-    public ResponseEntity<Map<String, Object>> getDoctorAvailability(String user, Long doctorId, String date, String token) {
+    public ResponseEntity<Map<String, Object>> getDoctorAvailability(String user, Long id, String date, String token) {
         // Validate the token
         if (!tokenService.validateToken(token, user)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid token"));
@@ -35,7 +35,7 @@ public class DoctorController {
 
         // Get doctor's availability
         LocalDate localDate = LocalDate.parse(date);
-        List<String> availabilityList = doctorService.getDoctorAvailability(doctorId, localDate);
+        List<String> availabilityList = doctorService.getDoctorAvailability(id, localDate);
         Map<String, Object> availability = Map.of("availability", availabilityList);
         return ResponseEntity.ok(availability);
     }
