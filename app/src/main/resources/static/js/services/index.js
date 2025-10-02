@@ -1,4 +1,4 @@
-import { openModal } from '../utils/modal.js'; // Import the modal utility functions to handle showing/hiding modals. Modals are simple popups for login forms or messages.
+import { openModal } from '../components/modals.js'; // Import the modal utility functions to handle showing/hiding modals. Modals are simple popups for login forms or messages.
 import { API_BASE_URL } from '../config.js'; // Import the base API URL form the config file. The BASE_API_URL is a variable that hold the root URL created in config.js
 import { selectRole } from '../render.js'; // Import the selectRole function from render.js to handle role selection and redirection after login
 
