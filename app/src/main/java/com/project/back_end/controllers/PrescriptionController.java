@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.back_end.models.Prescription;
+import com.project.back_end.services.ClinicService;
 import com.project.back_end.services.PrescriptionService;
-import com.project.back_end.services.Service;
 import com.project.back_end.services.TokenService;
 
 
@@ -22,7 +22,7 @@ public class PrescriptionController {
     @Autowired
     private PrescriptionService prescriptionService;
     @Autowired
-    private Service service;
+    private ClinicService service;
     @Autowired
     private TokenService tokenService;
 

@@ -1,6 +1,14 @@
 package com.project.back_end.services;
 
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.back_end.DTO.Login;
@@ -12,29 +20,20 @@ import com.project.back_end.repo.AdminRepository;
 import com.project.back_end.repo.DoctorRepository;
 import com.project.back_end.repo.PatientRepository;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-
-import java.util.Map;
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.catalina.connector.Response;
-
 
 
 @Service
-public class Service {
+public class ClinicService {
 
     private final TokenService tokenService;
+    private final AdminRepository adminRepository;
     private final DoctorRepository doctorRepository;
     private final PatientRepository patientRepository;
     private final DoctorService doctorService;
     private final PatientService patientService;
 
     @Autowired
-    public Service(
+    public ClinicService(
         TokenService tokenService,
         AdminRepository adminRepository,
         DoctorRepository doctorRepository,
@@ -183,7 +182,10 @@ public class Service {
                 return patientService.filterByCondition(condition, patientId).getBody();
             } else if (doctorName != null) {
                 return patientService.filterByDoctor(doctorName, patientId).getBody();
-            } 
+            } else {
+                // Return all appointments for the patient if no filters are provided
+                return patientService.getAllAppointmentsForPatient(patientId).getBody();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             response.put("message", "Error filtering patient appointments: " + e.getMessage());

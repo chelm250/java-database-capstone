@@ -233,6 +233,28 @@ public class PatientService {
         }
     }
 
+    public ResponseEntity<Map<String, Object>> getAllAppointmentsForPatient(Long patientId) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            if (!patientRepository.existsById(patientId)) {
+                response.put("message", "Patient not found.");
+                return ResponseEntity.status(404).body(response);
+            }
+            List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
+            List<AppointmentDTO> appointmentDTOs = appointments.stream()
+                .map(AppointmentDTO::new)
+                .collect(Collectors.toList());
+
+            response.put("appointments", appointmentDTOs);
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.put("message", "Error retrieving appointments.");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
 
 
 

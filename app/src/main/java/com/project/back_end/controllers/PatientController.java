@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.back_end.DTO.Login;
 import com.project.back_end.models.Patient;
+import com.project.back_end.services.ClinicService;
 import com.project.back_end.services.PatientService;
-import com.project.back_end.services.Service;
 import com.project.back_end.services.TokenService;
 
 
@@ -23,7 +23,7 @@ public class PatientController {
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private Service service;
+    private ClinicService service;
 
 
     @GetMapping("/patient")
