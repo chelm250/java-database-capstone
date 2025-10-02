@@ -28,7 +28,7 @@ public class DoctorService {
     // Methods for managing doctors
     public List<String> getDoctorAvailability(Long doctorId, LocalDate date) {
         List<String> allSlots = doctorRepository.findAvailableTimesById(doctorId);
-        List<String> bookedSlots = appointmentRepository.findBookedTimesByDoctorIdAndDate(doctorId, date);
+        List<String> bookedSlots = appointmentRepository.findBookedTimesByDoctorIdAndAppointmentTime(doctorId, date);
         allSlots.removeAll(bookedSlots);
         return allSlots;
     }

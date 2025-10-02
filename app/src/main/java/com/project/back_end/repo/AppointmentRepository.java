@@ -53,7 +53,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
            "AND a.status = :status")
    public List<Appointment> filterByDoctorNameAndPatientIdAndStatus(@Param("doctorName") String doctorName, @Param("patientId") Long patientId, @Param("status") int status);
 
-   public List<String> findBookedTimesByDoctorIdAndDate(Long doctorId, LocalDate date);
+   public List<String> findBookedTimesByDoctorIdAndAppointmentTime(Long doctorId, LocalDate date);
 
    public List<Appointment> findByPatientIdAndStatus(Long id, int status);
 
