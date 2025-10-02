@@ -1,12 +1,10 @@
 package com.project.back_end.services;
 
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.security.Keys;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
+import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,9 +13,12 @@ import com.project.back_end.repo.AdminRepository;
 import com.project.back_end.repo.DoctorRepository;
 import com.project.back_end.repo.PatientRepository;
 
-import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 
 
 
@@ -56,14 +57,14 @@ public class TokenService {
    
     public String extractIdentifier(String token) {
         try {
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey())
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
-            return claims.getSubject(); // Return username or email as identifier
+            JwtParser parser = Jwts.parser()
+                .verifyWith(getSigningKey()) // Must be a SecretKey
+                .build();
+
+            Jws<Claims> jws = parser.parseSignedClaims(token);
+            return jws.getPayload().getSubject();
         } catch (JwtException e) {
-            return null; // Invalid token
+            return null;
         }
     }
 
